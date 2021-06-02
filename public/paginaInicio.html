@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="STYLESHEET" type="text/css" href="estilos.css">
+    <script src="./script.js"></script>
+</head>
+
+<body>
+    <title>Kiosko de cromos</title>
+    <img src="logo.PNG" style="width: 200px; height: 200px;">
+
+    <div class="form-popup" id="myForm">
+        <form action="./perfil.html" class="form-container">
+          <h1>Login</h1>
+      
+          <label for="email"><b>Email</b></label>
+          <input type="text" placeholder="Enter Email" name="email" required>
+      
+          <label for="psw"><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" name="psw" required>
+      
+          <button type="submit" class="btn">Login</button>
+          <button type="button" class="btn cancel" onclick="cerrarFormularioAcceso()">Close</button>
+        </form>
+      </div>
+
+    <ul>
+        <li style="float:right" onclick="registroUsuarios()"><a href="#registro">Registro Usuarios</a></li>
+        <li style="float:right" onclick="abrirFormularioAcceso()"><a href="#acceso">Acceso Usuarios</a></li>
+    </ul>
+
+    <div>
+        <h2>Bienvenidos al kiosko de cromos</h2>
+    </div>
+
+
+
+
+
+
+
+</body>
+
+</html>

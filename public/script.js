@@ -5,3 +5,7 @@ function abrirFormularioAcceso(){
 function cerrarFormularioAcceso(){
     document.getElementById("myForm").style.display = "none";
 }
+
+function login(){
+    
+}

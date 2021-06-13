@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="STYLESHEET" type="text/css" href="estilos.css">
+</head>
+
+<body>
+    <title>Actividades administrador</title>
+    <h1>- ACTIVIDADES ADMINISTRADOR -</h1>
+</body>
+
+<table width="100%">
+        <td width=60%>
+            <h2>Crear nueva coleccion</h2>
+            <div style="margin-left: 350px;">
+                <form id="formActvAdmin">
+                    <label for="nombreColeccion"><b>Nombre de la coleccion</b></label> <br>
+                    <input type="text" placeholder="Nombre de la coleccion" id="nombreColeccion" required size="30"><br><br>
+
+                    <label for="numCromos"><b>Numero de cromos</b></label><br>
+                    <input type="text" placeholder="Email" id="numCromos" required size="30"><br><br>
+
+                    <button class="boton2" type="submit" class="btn" onclick="darAlta()">Dar de alta coleccion</button> <br><br>
+                </form>
+            </div>
+        </td>
+
+        <td width=40%>
+            <h2>Copiar cromos de colección</h2>
+            <textarea readonly id="copias"></textarea>
+        </td>
+</table>
+
+</html>

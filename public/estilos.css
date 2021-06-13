@@ -1,72 +1,72 @@
 button {
-    text-decoration: none;
-    padding: 10px;
-    font-size: 20px;
-    border: 0px;
-    text-align: center;
-    width: 200px;
-    height: 40px;
-    background-color: bisque;
+  text-decoration: none;
+  padding: 10px;
+  font-size: 20px;
+  border: 0px;
+  text-align: center;
+  width: 200px;
+  height: 40px;
+  background-color: bisque;
 }
 
 body {
-    background-color: azure;
+  background-color: azure;
 }
 
 h1 {
-    color: black;
-    text-align: center;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 32px;
-    font-weight: bold;
-    background-color: bisque;
-    padding: 40px;
+  color: black;
+  text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 32px;
+  font-weight: bold;
+  background-color: bisque;
+  padding: 40px;
 }
 
 ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: azure;
-  }
-  
-  li {
-    float: left;
-  }
-  
-  li a {
-    display: block;
-    padding: 8px;
-    color: black;
-  }
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: azure;
+}
 
-  li a:hover{
-      background-color: #FE92DF;
-  }
+li {
+  float: left;
+}
 
+li a {
+  display: block;
+  padding: 8px;
+  color: black;
+}
 
- ul{
-   width: 20%;
-   float: right;
- }
+li a:hover {
+  background-color: #FE92DF;
+}
 
- .form-popup{
-   display: none;
-   position: fixed;
-   bottom: 0;
-   right: 15px;
+ul {
+  width: 20%;
+  float: right;
+}
+
+.form-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 15px;
   border: 3px solid #f1f1f1;
   z-index: 9;
- }
+}
 
- .form-container {
+.form-container {
   max-width: 300px;
   padding: 10px;
   background-color: white;
 }
 
-.form-container input[type=text], .form-container input[type=password] {
+.form-container input[type=text],
+.form-container input[type=password] {
   width: 100%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -74,12 +74,15 @@ ul {
   background: #f1f1f1;
 }
 
-.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+.form-container input[type=text]:focus,
+.form-container input[type=password]:focus {
   background-color: #ddd;
   outline: none;
 }
 
+
 /* Set a style for the submit/login button */
+
 .form-container .btn {
   background-color: #04AA6D;
   color: white;
@@ -87,16 +90,33 @@ ul {
   border: none;
   cursor: pointer;
   width: 100%;
-  margin-bottom:10px;
+  margin-bottom: 10px;
   opacity: 0.8;
 }
 
+
 /* Add a red background color to the cancel button */
+
 .form-container .cancel {
   background-color: red;
 }
 
+
 /* Add some hover effects to buttons */
-.form-container .btn:hover, .open-button:hover {
+
+.form-container .btn:hover,
+.open-button:hover {
   opacity: 1;
+}
+
+.msj {
+  color: black;
+  text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 13px;
+  background-color: bisque;
+  padding: 10px;
+  height: 170px;
+  width: 170px;
+  text-align: justify;
 }

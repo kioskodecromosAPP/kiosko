@@ -9,6 +9,17 @@ button {
   background-color: bisque;
 }
 
+.boton2{
+  text-decoration: none;
+  padding: 10px;
+  font-size: 20px;
+  border: 0px;
+  text-align: center;
+  width: 200px;
+  height: 60px;
+  background-color: bisque;
+}
+
 body {
   background-color: azure;
 }
@@ -21,6 +32,16 @@ h1 {
   font-weight: bold;
   background-color: bisque;
   padding: 40px;
+}
+
+h2 {
+  color: black;
+  text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 25px;
+  font-weight: bold;
+  background-color:#fad6a5;
+  padding: 20px;
 }
 
 ul {

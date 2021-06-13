@@ -10,9 +10,21 @@ function registroUsuarios(){
     window.location.replace("./registro.html");
 }
 
+
+function comprobarCookie(){
+    
+    if(document.cookie == ""){
+        abrirFormularioAcceso();
+    }else{
+        window.location.replace("./perfil.html");
+    }
+
+}
+
 function login(){
     const email = document.getElementById("email").value;
     const password = document.getElementById("pwd").value;
+    crearCookie();
 
     fetch('/login',{
         method: 'POST',
@@ -37,4 +49,8 @@ function login(){
     console.log(password);
 
     
+}
+
+function crearCookie(){
+    document.cookie = "emailUsuario=" + email + "; max-age=60";
 }

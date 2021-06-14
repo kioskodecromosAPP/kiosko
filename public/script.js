@@ -36,13 +36,13 @@ function datos(email) {
             return res.json()
         })
         .then((response) => {
-            let datosUsuarioDB = JSON.stringify(response);
-            nombreGlobal = datosUsuarioDB.NOMBRE;
-            apellidoGlobal = datosUsuarioDB.APELLIDOS;
-            emailGlobal = datosUsuarioDB.EMAIL;
-            esAdminGlobal = datosUsuarioDB.ESADMIN;
-            contrasenyaGlobal = datosUsuarioDB.CONTRASENYA;
-            puntosGlobal = datosUsuarioDB.PUNTOS;
+            console.log(JSON.stringify(response));
+            nombreGlobal = JSON.stringify(response.NOMBRE);
+            apellidoGlobal = JSON.stringify(response.APELLIDOS);
+            emailGlobal = JSON.stringify(response.EMAIL);
+            esAdminGlobal = JSON.stringify(response.ESADMIN);
+            contrasenyaGlobal = JSON.stringify(response.CONTRASENYA);
+            puntosGlobal = JSON.stringify(response.PUNTOS);
         })
 }
 
@@ -124,7 +124,7 @@ function login() {
             alert("El login es correcto");
             datos(email);
             //crearCookie();
-            //window.location.replace("./paginaInicio.html");
+            window.location.replace("./paginaInicio.html");
         }
     })
 }

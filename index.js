@@ -4,10 +4,10 @@ const router = express.Router();
 const fetch = require('node-fetch');
 app.use(express.static('public'));
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 const mysql = require('mysql');
 const pokemon = require('pokemontcgsdk');
-pokemon.configure({apiKey: 'b00e4133-8d52-447c-96fa-0ef1007f84e3'});
+pokemon.configure({ apiKey: 'b00e4133-8d52-447c-96fa-0ef1007f84e3' });
 pokemon.card.find('xy1-1')
     .then(card => {
         console.log(card.tcgplayer.prices)
@@ -16,7 +16,7 @@ pokemon.card.find('xy1-1')
 const connection = mysql.createConnection({
     host: '127.0.0.1',
     user: 'root',
-    password: 'Javier3003',
+    password: 'admin',
     database: 'cromos'
 });
 
@@ -27,14 +27,11 @@ try {
 } catch (err) {
     console.log("Error al abrir la BD");
 }
-function comprobarAutentificacion(email, password) {
+async function comprobarAutentificacion(email, password) {
     var devuelve = false;
 
-    connection.query("SELECT * FROM USUARIOS WHERE EMAIL=?", [email], async (err, result) => {
-        if (err) throw err;
-
-        //console.log(result.length)
-
+    await connection.query("SELECT * FROM USUARIOS WHERE EMAIL=?", [email], (err, result) => {
+        console.log(result.length + ")=")
         if (result.length) {
             if (email == result[0].EMAIL && password == result[0].CONTRASENYA) {
                 console.log("HE ENTRADO");
@@ -47,14 +44,14 @@ function comprobarAutentificacion(email, password) {
 
 }
 
-function comprobarIdUnico(email) {
+async function comprobarIdUnico(email) {
     var unico = false;
-    if (err) throw err;
 
-    connection.query("SELECT * FROM USUARIOS WHERE EMAIL=?", [email], async (err, result) => {
+    await connection.query("SELECT COUNT (*) as total FROM USUARIOS WHERE EMAIL=?", [email], (err, result) => {
         if (err) throw err;
-
-        if (result.length == 0) {
+        console.log(result);
+        console.log(result[0].total);
+        if (result[0].total == 0) {
             unico = true;
         }
     })
@@ -64,32 +61,33 @@ function comprobarIdUnico(email) {
 
 
 app.post('/login', function (req, res) {
-    console.log(req.body);
+    let result = comprobarAutentificacion(req.body.email, req.body.password);
+    if (result) {
+        res.status(200).send();
+    } else {
+        res.status(400).send();
+    }
 
-    const promise = comprobarAutentificacion(req.body.email, req.body.password);
 
-    promise.then(result => {
-        if (result) {
-            res.status(200).send();
-        } else {
-            res.status(400).send();
-        }
-
-    })
 
 });
 
-app.post('/resgitro', function (req, res) {
+app.post('/registro', function (req, res) {
     console.log(req.body);
     //COMPROBAMOS QUE NO EXISTE UN EMAIL IGUAL
-    const aux = comprobarIdUnico(req.body.email);
+    let aux = comprobarIdUnico(req.body.email);
+    console.log(aux);
     if (aux == false) {
-        alert("Ya hay un usuario registrado con esta dirección de correo");
+        res.status(300).send();
     } else {
         //GUARDAMOS AL USUARIO EN LA BASE DE DATOS
 
         var query = connection.query('INSERT INTO USUARIOS(NOMBRE,APELLIDOS,EMAIL,ESADMIN,CONTRASENYA,PUNTOS) VALUES(?, ?, ?, ?, ?,?)', [req.body.name, req.body.apellidos, req.body.email, '0', req.body.contrasenya, '0'], async (err, result) => {
-            if (err) throw err;
+            if (err) {
+                res.status(400).send();
+                throw err;
+            }
+            res.status(200).send();
             console.log(query);
         })
     }

@@ -35,11 +35,13 @@ function registro() {
         console.log(response.status);
         if (response.status == 400) {
             alert("El registro ha sido incorrecto");
-        } else {
+        } else if(response.status == 200){
             alert("El registro es correcto");
-            window.location.replace("./perfil.html");
+           // window.location.replace("./perfil.html");
+        } else {
+            alert("Ya hay un usuario registrado con ese email");
         }
-    })
+    });
 
     console.log(name);
     console.log(apellidos);
@@ -53,7 +55,8 @@ function comprobarCookie(){
     if(document.cookie == ""){
         abrirFormularioAcceso();
     }else{
-        window.location.replace("./perfil.html");
+        abrirFormularioAcceso();
+        //window.location.replace("./perfil.html");
     }
 
 }
@@ -73,12 +76,12 @@ function login(){
             alert("El login ha sido incorrecto");
         }else{
             alert("El login es correcto");
-            crearCookie();
+            //crearCookie();
             window.location.replace("./perfil.html");
         }
     })    
 }
 
 function crearCookie(){
-    document.cookie = "emailUsuario=" + email + "; max-age=1800";
+    document.cookie = "emailUsuario=" + email + "; max-age=20";
 }

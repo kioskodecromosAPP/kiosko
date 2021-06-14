@@ -4,20 +4,35 @@ const router = express.Router();
 const fetch = require('node-fetch');
 app.use(express.static('public'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({extended: true}));
 const mysql = require('mysql');
 const pokemon = require('pokemontcgsdk');
-pokemon.configure({ apiKey: 'b00e4133-8d52-447c-96fa-0ef1007f84e3' });
-pokemon.card.find('base1-4')
+pokemon.configure({apiKey: 'b00e4133-8d52-447c-96fa-0ef1007f84e3'});
+pokemon.card.find('xy1-1')
     .then(card => {
-        console.log(card.) // "Charizard"
+        console.log(card.tcgplayer.prices)
     });
+
+const connection = mysql.createConnection({
+    host: '127.0.0.1',
+    user: 'root',
+    password: '310100sR.',
+    database: 'cromos'
+});
+
+try {
+    connection.connect(function (err) {
+        if (err) throw err;
+    });
+} catch (err) {
+    console.log("Error al abrir la BD");
+}
 
 async function comprobarAutentificacion(email, password) {
     var devuelve = false;
-    await connection.connect(function(err) {
+    await connection.connect(function (err) {
         if (err) throw err;
-        connection.query("SELECT * FROM USUARIOS WHERE EMAIL=?", [email], async(err, result) => {
+        connection.query("SELECT * FROM USUARIOS WHERE EMAIL=?", [email], async (err, result) => {
             if (err) throw err;
 
             //console.log(result.length)
@@ -38,10 +53,10 @@ async function comprobarAutentificacion(email, password) {
 
 function comprobarIdUnico(email) {
     var unico = false;
-    connection.connect(function(err) {
+    connection.connect(function (err) {
         if (err) throw err;
 
-        connection.query("SELECT * FROM USUARIOS WHERE EMAIL=?", [email], async(err, result) => {
+        connection.query("SELECT * FROM USUARIOS WHERE EMAIL=?", [email], async (err, result) => {
             if (err) throw err;
 
             if (result.length == 0) {
@@ -53,51 +68,40 @@ function comprobarIdUnico(email) {
     return unico;
 }
 
-router.route('/')
-    .post(function(req, res) {
-        console.log(req.body);
 
-        const promise = comprobarAutentificacion(req.body.email, req.body.password);
+app.post('/login', function (req, res) {
+    console.log(req.body);
 
-        promise.then(result => {
-            if (result) {
-                res.status(200).send();
-            } else {
-                res.status(400).send();
-            }
+    const promise = comprobarAutentificacion(req.body.email, req.body.password);
 
-        })
-
-    });
-
-app.use('/login', router);
-
-router.route('/resgitro')
-    .post(function(req, res) {
-        console.log(req.body);
-        //COMPROBAMOS QUE NO EXISTE UN EMAIL IGUAL
-        const aux = comprobarIdUnico(req.body.email);
-        if (aux == false) {
-            alert("Ya hay un usuario registrado con esta dirección de correo");
+    promise.then(result => {
+        if (result) {
+            res.status(200).send();
         } else {
-            //GUARDAMOS AL USUARIO EN LA BASE DE DATOS
-            connection.connect(function(err) {
-                if (err) throw err;
-                var query = connection.query('INSERT INTO USUARIOS(NOMBRE,APELLIDOS,EMAIL,ESADMIN,CONTRASENYA,PUNTOS) VALUES(?, ?, ?, ?, ?,?)', [req.body.name, req.body.apellidos, req.body.email, '0', req.body.contrasenya, '0'], async(err, result) => {
-                    if (err) throw err;
-                    console.log(query);
-                })
-            })
-            connection.end;
+            res.status(400).send();
         }
-    });
 
+    })
 
-var connection = mysql.createConnection({
-    host: '127.0.0.1',
-    user: 'root',
-    password: '310100sR.',
-    database: 'cromos'
+});
+
+app.post('/resgitro', function (req, res) {
+    console.log(req.body);
+    //COMPROBAMOS QUE NO EXISTE UN EMAIL IGUAL
+    const aux = comprobarIdUnico(req.body.email);
+    if (aux == false) {
+        alert("Ya hay un usuario registrado con esta dirección de correo");
+    } else {
+        //GUARDAMOS AL USUARIO EN LA BASE DE DATOS
+        connection.connect(function (err) {
+            if (err) throw err;
+            var query = connection.query('INSERT INTO USUARIOS(NOMBRE,APELLIDOS,EMAIL,ESADMIN,CONTRASENYA,PUNTOS) VALUES(?, ?, ?, ?, ?,?)', [req.body.name, req.body.apellidos, req.body.email, '0', req.body.contrasenya, '0'], async (err, result) => {
+                if (err) throw err;
+                console.log(query);
+            })
+        })
+        connection.end;
+    }
 });
 
 app.listen(3000, () => {

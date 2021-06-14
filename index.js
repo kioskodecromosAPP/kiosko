@@ -16,7 +16,7 @@ pokemon.card.find('xy1-1')
 const connection = mysql.createConnection({
     host: '127.0.0.1',
     user: 'root',
-    password: 'root',
+    password: 'admin',
     database: 'cromos'
 });
 

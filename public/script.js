@@ -6,10 +6,6 @@ function cerrarFormularioAcceso(){
     document.getElementById("myForm").style.display = "none";
 }
 
-function registroUsuarios(){
-    window.location.replace("./registro.html");
-}
-
 function registroUsuarios() {
     window.location.replace("./registro.html");
 }
@@ -37,7 +33,7 @@ function registro() {
             alert("El registro ha sido incorrecto");
         } else if(response.status == 200){
             alert("El registro es correcto");
-           // window.location.replace("./perfil.html");
+            window.location.replace("./paginaInicio.html");
         } else {
             alert("Ya hay un usuario registrado con ese email");
         }
@@ -77,7 +73,7 @@ function login(){
         }else{
             alert("El login es correcto");
             //crearCookie();
-            window.location.replace("./perfil.html");
+            window.location.replace("./paginaInicio.html");
         }
     })    
 }

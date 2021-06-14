@@ -10,6 +10,7 @@ function getEmail() {
 }
 
 function getNombre() {
+    console.log(nombreGlobal);
     return nombreGlobal;
 }
 
@@ -124,7 +125,7 @@ function login() {
             alert("El login es correcto");
             datos(email);
             //crearCookie();
-            window.location.replace("./paginaInicio.html");
+            // window.location.replace("./paginaInicio.html");
         }
     })
 }
@@ -135,6 +136,7 @@ function crearCookie() {
 
 function rellenarDatosPerfil() {
     document.getElementById("nombrePerfil").value = getNombre();
+    console.log(getNombre());
     document.getElementById("apellidosPerfil").value = getApellidos();
     document.getElementById("emPerfil").value = getEmail();
     document.getElementById("conPerfil").value = getContrasenya();

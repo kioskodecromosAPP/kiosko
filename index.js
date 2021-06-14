@@ -32,13 +32,12 @@ async function comprobarAutentificacion(email, password) {
 
     await connection.query("SELECT * FROM USUARIOS WHERE EMAIL=?", [email], (err, result) => {
         console.log(result.length + ")=")
-        if (result.length) {
+        //if (result.length) {
             if (email == result[0].EMAIL && password == result[0].CONTRASENYA) {
                 console.log("HE ENTRADO");
                 devuelve = true;
-                // return devuelve;
             }
-        }
+        //}
     });
     return devuelve;
 

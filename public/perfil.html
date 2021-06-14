@@ -3,6 +3,7 @@
 
 <head>
     <link rel="STYLESHEET" type="text/css" href="estilos.css">
+    <script src="./script.js"></script>
 </head>
 
 <body>
@@ -14,14 +15,30 @@
 
     <table width="100%">
         <td width="30%">
-            <div class=msj>
-                <tr>
+            <tr>
+                <div style="background-color: bisque; padding: 10px;height: 20px;width: 70px; text-align: center;">
                     DATOS
-                </tr>
-            </div>
+                </div>
+            </tr>
 
             <tr>
-                Nombre: 
+                <div onload="rellenarDatosPerfil()">
+                    <label for="nombre"><b>Nombre:</b></label> <br>
+                    <label type="text" id="nombrePerfil"><br><br>
+
+                    <label for="apellidos"><b>Apellidos:</b></label><br>
+                    <label type="text" id="apellidosPerfil"><br><br>
+
+                    <label for="em"><b>Email:</b></label><br>
+                    <label type="text" id="emPerfil"><br><br>
+
+                    <label for="cont"><b>Contraseña:</b></label><br>
+                    <label type="password" id="contPerfil"><br><br>
+
+                    <img src=fotoMoneda.png>
+                    <label for="puntos"><b>Puntos:</b></label>
+                    <label type="text" id="puntosPerfil" size="10" readonly><br><br>
+                </div>
             </tr>
         </td>
     </table>

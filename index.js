@@ -16,12 +16,12 @@ pokemon.card.find('xy1-1')
 const connection = mysql.createConnection({
     host: '127.0.0.1',
     user: 'root',
-    password: 'admin',
+    password: 'root',
     database: 'cromos'
 });
 
 try {
-    connection.connect(function (err) {
+    connection.connect(function(err) {
         if (err) throw err;
     });
 } catch (err) {
@@ -32,11 +32,10 @@ async function comprobarAutentificacion(email, password) {
 
     await connection.query("SELECT * FROM USUARIOS WHERE EMAIL=?", [email], (err, result) => {
         console.log(result.length + ")=")
-        //if (result.length) {
-            if (email == result[0].EMAIL && password == result[0].CONTRASENYA) {
-                console.log("HE ENTRADO");
-                devuelve = true;
-            }
+            //if (result.length) {
+        if (email == result[0].EMAIL && password == result[0].CONTRASENYA) {
+            devuelve = true;
+        }
         //}
     });
     return devuelve;
@@ -59,19 +58,16 @@ async function comprobarIdUnico(email) {
 }
 
 
-app.post('/login', function (req, res) {
+app.post('/login', function(req, res) {
     let result = comprobarAutentificacion(req.body.email, req.body.password);
     if (result) {
         res.status(200).send();
     } else {
         res.status(400).send();
     }
-
-
-
 });
 
-app.post('/registro', function (req, res) {
+app.post('/registro', function(req, res) {
     console.log(req.body);
     //COMPROBAMOS QUE NO EXISTE UN EMAIL IGUAL
     let aux = comprobarIdUnico(req.body.email);
@@ -81,7 +77,7 @@ app.post('/registro', function (req, res) {
     } else {
         //GUARDAMOS AL USUARIO EN LA BASE DE DATOS
 
-        var query = connection.query('INSERT INTO USUARIOS(NOMBRE,APELLIDOS,EMAIL,ESADMIN,CONTRASENYA,PUNTOS) VALUES(?, ?, ?, ?, ?,?)', [req.body.name, req.body.apellidos, req.body.email, '0', req.body.contrasenya, '0'], async (err, result) => {
+        var query = connection.query('INSERT INTO USUARIOS(NOMBRE,APELLIDOS,EMAIL,ESADMIN,CONTRASENYA,PUNTOS) VALUES(?, ?, ?, ?, ?,?)', [req.body.name, req.body.apellidos, req.body.email, '0', req.body.contrasenya, '0'], async(err, result) => {
             if (err) {
                 res.status(400).send();
                 throw err;
@@ -90,6 +86,17 @@ app.post('/registro', function (req, res) {
             console.log(query);
         })
     }
+
+});
+
+app.post('/datos', function(req, res) {
+
+    connection.query("SELECT * FROM USUARIOS WHERE EMAIL=?", [req.body.email], async(err, result) => {
+        var string = JSON.stringify(result);
+        var json = JSON.parse(string);
+        res.send(json[0]);
+    })
+
 
 });
 connection.end;

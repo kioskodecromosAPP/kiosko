@@ -69,6 +69,7 @@ app.post('/login', function (req, res) {
             console.log("ERROR")
         }
     });
+    
 });
 
 app.post('/registro', function (req, res) {

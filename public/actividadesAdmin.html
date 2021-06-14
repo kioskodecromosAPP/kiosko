@@ -11,28 +11,34 @@
 </body>
 
 <table width="100%">
-        <td width=60%>
-            <h2>Crear nueva coleccion</h2>
-            <div style="margin-left: 350px;">
-                <form id="formActvAdmin">
-                    <label for="nombreColeccion"><b>Nombre de la coleccion</b></label> <br>
-                    <input type="text" placeholder="Nombre de la coleccion" id="nombreColeccion" required size="30"><br><br>
+        <tr>
+            <td style="width: 60%;">
+                <h2>Crear nueva coleccion</h2>
+            </td>
 
-                    <label for="numCromos"><b>Numero de cromos</b></label><br>
-                    <input type="text" placeholder="Email" id="numCromos" required size="30"><br><br>
-                    
-                    <label for="estado"><b>Estado de la coleccion</b></label><br>
-                    <input type="text" placeholder="Estado de la coleccion" id="estado" required size="30"><br><br>
+            <td style="width: 40%;">
+                <h2>Administrar colecciones</h2>
+            </td>
+        </tr>
 
-                    <button class="boton2" type="submit" onclick="darAlta()">Dar de alta coleccion</button> <br><br>
-                </form>
-            </div>
-        </td>
-
-        <td width=40%>
-            <h2>Copiar cromos de colección</h2>
-            <textarea readonly id="copias"></textarea>
-        </td>
+        <tr>
+            <td style="width: 60%;">
+                <div style="margin-left: 350px;">
+                    <form id="formActvAdmin">
+                        <label for="nombreColeccion"><b>Nombre de la coleccion</b></label> <br>
+                        <input type="text" placeholder="Nombre de la coleccion" id="nombreColeccion" required size="30"><br><br>
+                
+                        <label for="numCromos"><b>Numero de cromos</b></label><br>
+                        <input type="text" placeholder="Email" id="numCromos" required size="30"><br><br>
+                        
+                        <label for="estado"><b>Estado de la coleccion</b></label><br>
+                        <input type="text" placeholder="Estado de la coleccion" id="estado" required size="30"><br><br>
+                
+                        <button class="boton2" type="submit" onclick="darAlta()">Dar de alta coleccion</button> <br><br>
+                    </form>
+                </div>
+            </td>
+        </tr>
 </table>
 
 </html>

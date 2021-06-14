@@ -6,7 +6,9 @@ app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 const mysql = require('mysql');
-const pokemon = require('pokemontcgsdk');
+
+const cookieCreada = false;
+/*const pokemon = require('pokemontcgsdk');
 pokemon.configure({apiKey: 'b00e4133-8d52-447c-96fa-0ef1007f84e3'});
 pokemon.set.find('sm1')
     .then(card => {
@@ -16,7 +18,7 @@ pokemon.card.all({q: 'type:Grass'})
     .then((cards) => {
         console.log(cards.data[0].name) // "Blastoise"
     })
-
+*/
 const connection = mysql.createConnection({
     host: '127.0.0.1',
     user: 'root',
@@ -37,6 +39,10 @@ function comprobarAutentificacion(email, password) {
    // let devuelve = false;
     //let check;
 
+}
+
+function cookie(){
+    cookieCreada = true;
 }
 
 async function comprobarIdUnico(email) {
@@ -71,6 +77,19 @@ app.post('/login', function (req, res) {
     });
     
 });
+
+
+app.post('/colecciones', function (req, res) {
+
+    connection.query("SELECT * FROM COLECCIONES WHERE USUARIOEMAIL=?", [req.body.email], async (err, result) => {
+        var string = JSON.stringify(result);
+        var json = JSON.parse(string);
+        res.send(json[0]);
+    })
+
+
+});
+
 
 app.post('/registro', function (req, res) {
     console.log(req.body);

@@ -4,6 +4,14 @@ let apellidoGlobal;
 let contrasenyaGlobal;
 let puntosGlobal;
 let esAdminGlobal;
+let cookieCreada;
+
+function comprobarLogueo(){
+    if(document.cookie == ""){
+        window.location.replace("./index.html");
+        alert("No dispone de acceso a dicha sección. Será redirigido a la página principal.")
+    }
+}
 
 function getEmail() {
     return emailGlobal;
@@ -102,8 +110,7 @@ function comprobarCookie() {
     if (document.cookie == "") {
         abrirFormularioAcceso();
     } else {
-        abrirFormularioAcceso();
-        //window.location.replace("./perfil.html");
+        window.location.replace("./perfil.html");
     }
 
 }
@@ -123,15 +130,16 @@ function login() {
             alert("El login ha sido incorrecto");
         } else {
             alert("El login es correcto");
-            datos(email);
-            //crearCookie();
-            // window.location.replace("./paginaInicio.html");
+           // datos(email);
+            crearCookie();
+            window.location.replace("./paginaInicio.html");
         }
     })
 }
 
 function crearCookie() {
-    document.cookie = "emailUsuario=" + email + "; max-age=20";
+    document.cookie = "emailUsuario=" + email + "; max-age=1800";
+    cookieCreada = true;
 }
 
 function rellenarDatosPerfil() {

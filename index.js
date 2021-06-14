@@ -6,7 +6,12 @@ app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 const mysql = require('mysql');
-
+const pokemon = require('pokemontcgsdk');
+pokemon.configure({ apiKey: 'b00e4133-8d52-447c-96fa-0ef1007f84e3' });
+pokemon.card.find('base1-4')
+    .then(card => {
+        console.log(card.) // "Charizard"
+    });
 
 async function comprobarAutentificacion(email, password) {
     var devuelve = false;
@@ -54,13 +59,13 @@ router.route('/')
 
         const promise = comprobarAutentificacion(req.body.email, req.body.password);
 
-        promise.then(result =>{
+        promise.then(result => {
             if (result) {
                 res.status(200).send();
             } else {
                 res.status(400).send();
             }
-    
+
         })
 
     });

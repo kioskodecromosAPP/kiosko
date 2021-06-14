@@ -3,6 +3,7 @@
     "express": "^4.17.1",
     "mysql": "^2.18.1",
     "node-fetch": "^2.6.1",
-    "passport": "^0.4.1"
+    "passport": "^0.4.1",
+    "pokemontcgsdk": "^2.0.0"
   }
 }

@@ -3,36 +3,52 @@
 
 <head>
     <link rel="STYLESHEET" type="text/css" href="estilos.css">
-    <script src="./script.js"></script>
 </head>
 
 <body>
-    <title>Kiosko de cromos</title>
-    <img src="logo.PNG" style="width: 200px; height: 200px;">
 
-    <div class="form-popup" id="myForm">
-        <form class="form-container">
-          <h1>Login</h1>
-      
-          <label for="email"><b>Email</b></label>
-          <input type="text" placeholder="Enter Email" id="email" required>
-      
-          <label for="psw"><b>Contraseña</b></label>
-          <input type="password" placeholder="Enter Password" id="pwd" required>
-      
-          <button type="submit" class="btn" onclick="login()">Login</button>
-          <button type="button" class="btn cancel" onclick="cerrarFormularioAcceso()">Close</button>
-        </form>
-      </div>
+    <title>Página principal</title>
 
-    <ul>
-        <li style="float:right" onclick="registroUsuarios()"><a href="#registro">Registro Usuarios</a></li>
-        <li style="float:right" onclick="comprobarCookie()"><a href="#acceso">Zona Usuarios</a></li>
-    </ul>
+    <table align="left" width="20%">
+        <tr style="height: 50px;">
+            <td>
+                <img src="logo.PNG" style="width: 200px; height: 200px;">
+            </td>
+        </tr>
+        <tr style="height: 30px;">
+            <td>
+                <input type="text" id="name" readonly style="border: 0px; padding-bottom: 30px; background-color: azure;">
+            </td>
+        </tr>
+        <tr style="height: 30px; ">
+            <td>
+                <button type="button" id="botonPerfil">Perfil</button>
+            </td>
+        </tr>
 
-    <div>
-        <h2>Bienvenidos al kiosko de cromos</h2>
-    </div>
+        <tr style="height: 30px; ">
+            <td>
+                <button type="button " id="botonColeciones ">Colecciones</button>
+            </td>
+        </tr>
+
+        <tr style="height: 30px; ">
+            <td>
+                <button type="button " id="botonAlbumes ">Álbumes</button>
+            </td>
+        </tr>
+
+        <tr style="height: 30px; ">
+            <td>
+                <button type="button " id="botonActividades ">Actividades</button>
+            </td>
+        </tr>
+
+    </table>
+
+    <table>
+
+    </table>
 
 </body>
 

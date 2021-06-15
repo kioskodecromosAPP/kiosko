@@ -3,6 +3,7 @@
 
 <head>
     <link rel="STYLESHEET" type="text/css" href="estilos.css">
+    <script src="./script.js"></script>
 </head>
 
 <body onload="comprobarLogueo()">
@@ -102,11 +103,22 @@
                 <input type="text" id="pregunta10" size="40"><br><br>
             </td>          
         </tr>
-    </table>
 
-    <div style="text-align:center;">
-        <button class= boton2 onclick="resolverPreguntas()" class=boton2 type="button " id="volverActividades" style="text-align:center;">Resolver</button>
-    </div>
+        <tr>
+            <td>
+                <div style="text-align:center;">
+                    <button class= boton2 onclick="resolverPreguntas()" class=boton2 type="button " id="volverActividades" style="text-align:center;">Resolver</button>
+                </div>
+            </td>
+
+            <td>
+                <div style="background-color: bisque; padding: 10px;height: 50px;width: 400px; text-align: center;">
+                    Puntos obtenidos:
+                    <input readonly type="text" id="puntosObtenidos" size="10" >
+                </div>
+            </td>
+        </tr>
+    </table>
 </body>
 
 </html>

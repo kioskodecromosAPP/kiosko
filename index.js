@@ -10,6 +10,10 @@ pokemon.configure({ apiKey: 'b00e4133-8d52-447c-96fa-0ef1007f84e3' });
 const mysql = require('mysql');
 let cookieCreada = false;
 
+const fs =require('fs');
+const data=fs.readFileSync('soluciones.json','utf-8');
+let solucion= JSON.parse(data);
+
 /*pokemon.set.find('sm1')
     .then(card => {
         console.log(card)
@@ -165,6 +169,27 @@ app.post('/datos', function(req, res) {
 
 
 });
+
+function palabraCorrecta(respuesta){
+    var counter=0;
+
+    for(var i=0;i<respuesta.length;i++){
+        var r=respuesta[i];
+
+        if(solucion[0][i]==r){
+            counter++;
+        }
+    }
+    return counter;
+}
+
+app.post('/preguntas', function(req,res) {
+        console.log(req.body);
+        const correcta = palabraCorrecta(req.body.respuestas);
+        console.log(correcta);
+        res.send(JSON.stringify(correcta))
+});
+
 connection.end;
 app.listen(3000, () => {
     console.log("Server on port 3000");

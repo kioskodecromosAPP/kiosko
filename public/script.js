@@ -194,7 +194,21 @@ function resolverPreguntas() {
         alert("Has acertado " + respuestas + " preguntas");
         puntos = respuestas * 5;
         document.getElementById("puntosObtenidos").value = puntos;
-    })
+        
+        fetch('/actualizarPuntos', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ "email": document.cookie, "puntos":puntos})
+        }).then(response => {
+            if(response.status == 400){
+                alert("La suma de los puntos ha sido errónea.")
+            }
+        })
+
+    });
+    
 }
 
 function crearColeccion(){

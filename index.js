@@ -174,6 +174,19 @@ app.post('/colecciones', function (req, res) {
 
 });
 
+
+app.post('/actualizarPuntos', function (req, res) {
+
+
+    connection.query("UPDATE usuarios SET PUNTOS = (PUNTOS + ?) WHERE EMAIL = ?", [req.body.puntos, req.body.email], async (err, result) => {
+        if(err){
+            res.status(400).send();
+        }
+    })
+
+
+});
+
 app.post('/crearCol', function(req,res){
     let aux = comprobarAlbum(req.body.id);
 

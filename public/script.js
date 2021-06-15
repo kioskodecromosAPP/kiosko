@@ -149,3 +149,40 @@ async function rellenarDatosPerfil() {
 function cerrarSesion() {
 
 }
+
+function resolverPreguntas(){
+    var respuestas=[];
+
+    document.getElementById("pregunta1").value=respuestas[0];
+    document.getElementById("pregunta2").value=respuestas[1];
+    document.getElementById("pregunta3").value=respuestas[2];
+    document.getElementById("pregunta4").value=respuestas[3];
+    document.getElementById("pregunta5").value=respuestas[4];
+    document.getElementById("pregunta6").value=respuestas[5];
+    document.getElementById("pregunta7").value=respuestas[6];
+    document.getElementById("pregunta8").value=respuestas[7];
+    document.getElementById("pregunta9").value=respuestas[8];
+    document.getElementById("pregunta10").value=respuestas[9];
+
+    return respuestas;
+}
+
+function comprobarSol(){
+    let respuestas=resolverPreguntas();
+
+    fetch ('/pasatiempo', {
+        method:'POST',
+        headers:{
+            'Content-Type' : 'application/json'
+        },
+
+        body: JSON.stringify({ "respuestas": respuestas})  
+    }).then(response => {
+        if(response.status!= 200){
+            alert("El pasatiempo es incorrecto.")
+        }else{
+            alert("¡ENHORABUENA! Has resuelto el crucigrama.")
+
+        }
+    })
+}

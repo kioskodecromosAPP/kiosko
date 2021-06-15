@@ -34,4 +34,5 @@ async function editarHTML () {
         htmlElement.className = 'image';
         document.getElementById("cromo"+i).appendChild(htmlElement);
     }
+    
 }

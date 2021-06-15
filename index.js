@@ -316,11 +316,10 @@ app.post('/registro', function(req, res) {
 });
 
 app.post('/datos', function(req, res) {
-
-    connection.query("SELECT * FROM USUARIOS WHERE EMAIL=?", [req.body.email], function(err, result) {
-        var string = JSON.stringify(result);
-        var json = JSON.parse(string);
-        res.send(json[0]);
+    connection.query("SELECT * FROM USUARIOS WHERE EMAIL = ?", [req.body.email], function(err, result) {
+        let string = JSON.stringify(result[0]);
+        let json = JSON.parse(string);
+        res.json(json);
     })
 
 

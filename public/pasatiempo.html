@@ -6,118 +6,597 @@
     <script src="./script.js"></script>
 </head>
 
-<body onload="comprobarLogueo()">
-    <title>Preguntas</title>
-    <h1>-JUEGO DE PREGUNTAS-</h1>
+<body onload="cargarFuncionesPasatiempo()">
+    <title>pasatiempo</title>
+    <h1>-PASATIEMPO-</h1>
     <div style="text-align: right;">
         <a href="actividades.html"><button class=boton2 type="button " id="volverActividades" style="text-align:center;">Volver a la página de actividades</button></a>
     </div>
 
     <table style="margin-top: 10px;">
-        <tr>
-            <td>
-                1.- Al mojarse, su piel cambia de color y pasa a ser invisible, como si se hubiese camuflado.
-            </td>  
-            <td>
-                <input type="text" id="pregunta1" size="40"><br><br>
-            </td>          
-        </tr>
+        <form id="sopaLetras">
+            <tr>
+                <!--Fila 1-->
+                <td>
+                    <input readonly name="1" type="text" id="c11" size="2" placeholder="F">
+                </td>
+                <td>
+                    <input readonly type="text" id="c12" size="2" placeholder="M">
+                </td>
 
-        <tr>
-            <td>
-                2.- Se nutre de la nieve acumulada en el terreno. Cuanta más ingiere, más imponentes se vuelven las púas que presenta en el lomo.
-            </td>  
-            <td>
-                <input type="text" id="pregunta2" size="40"><br><br>
-            </td>          
-        </tr>
+                <td>
+                    <input readonly type="text" id="c13" size="2" placeholder="Q">
+                </td>
 
-        <tr>
-            <td>
-                3.- Secreta toxinas por la piel y las almacena en una bolsa de veneno interna. Tocarlo da calambre.
-            </td>  
-            <td>
-                <input type="text" id="pregunta3" size="40"><br><br>
-            </td>          
-        </tr>
+                <td>
+                    <input readonly type="text" id="c14" size="2" placeholder="P">
+                </td>
 
-        <tr>
-            <td>
-                4.- Oprime a sus presas con su cuerpo candente. Una vez bien tostadas, las devora con fruición.
-            </td>  
-            <td>
-                <input type="text" id="pregunta4" size="40"><br><br>
-            </td>          
-        </tr>
+                <td>
+                    <input readonly type="text" id="c15" size="2" placeholder="D">
+                </td>
 
-        <tr>
-            <td>
-                5.- Produce electricidad con la robusta musculatura de la cola. El tamaño de la parte superior del cuerpo palidece en comparación con la inferior.
-            </td>  
-            <td>
-                <input type="text" id="pregunta5" size="40"><br><br>
-            </td>          
-        </tr>
+                <td>
+                    <input readonly type="text" id="c16" size="2" placeholder="H">
+                </td>
 
-        <tr>
-            <td>
-                6.- Con el fin de revitalizarse, inhala por la nariz la energía negativa que desprenden tanto personas como Pokémon cuando están descontentos.
-            </td>  
-            <td>
-                <input type="text" id="pregunta6" size="40"><br><br>
-            </td>          
-        </tr>
+                <td>
+                    <input readonly type="text" id="c17" size="2" placeholder="Q">
+                </td>
 
-        <tr>
-            <td>
-                7.- Son muy glotones, por lo que ayudan a la gente a cambio de comida. Echan chispas al correr.
-            </td>  
-            <td>
-                <input type="text" id="pregunta7" size="40"><br><br>
-            </td>          
-        </tr>
+                <td>
+                    <input readonly type="text" id="c18" size="2" placeholder="N" onclick="cambioColor(id)">
+                </td>
 
-        <tr>
-            <td>
-                8.- Realiza tareas que requieren de esfuerzo físico, es su fuerte. Con la lluvia, su cuerpo de cobre se oxida y adquiere una tonalidad verde intensa.
-            </td>  
-            <td>
-                <input type="text" id="pregunta8" size="40"><br><br>
-            </td>          
-        </tr>
+                <td>
+                    <input readonly type="text" id="c19" size="2" placeholder="M">
+                </td>
 
-        <tr>
-            <td>
-                9.- Almacena la arena que ingiere al perforar hoyos en la saca del cuello, cuya capacidad llega a alcanzar incluso los 8 kg.
-            </td>  
-            <td>
-                <input type="text" id="pregunta9" size="40"><br><br>
-            </td>          
-        </tr>
+                <td>
+                    <input readonly type="text" id="c110" size="2" placeholder="D">
+                </td>
 
-        <tr>
-            <td>
-                10.- Es habitual hallarlos en lo que antaño fueron lechos oceánicos. Maldice a aquellos que le dan un puntapié confundiéndolo con un pedrusco.
-            </td>  
-            <td>
-                <input type="text" id="pregunta10" size="40"><br><br>
-            </td>          
-        </tr>
+                <td>
+                    <input readonly type="text" id="c111" size="2" placeholder="V" onclick="cambioColor(id)">
+                </td>
 
-        <tr>
-            <td>
-                <div style="text-align:center;">
-                    <button class= boton2 onclick="resolverPreguntas()" class=boton2 type="button " id="volverActividades" style="text-align:center;">Resolver</button>
-                </div>
-            </td>
+                <td>
+                    <input readonly type="text" id="c112" size="2" placeholder="E" onclick="cambioColor(id)">
+                </td>
 
-            <td>
-                <div style="background-color: bisque; padding: 10px;height: 50px;width: 400px; text-align: center;">
-                    Puntos obtenidos:
-                    <input readonly type="text" id="puntosObtenidos" size="10" >
-                </div>
-            </td>
-        </tr>
+                <td>
+                    <input readonly type="text" id="c113" size="2" placeholder="P">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c114" size="2" placeholder="P" onclick="cambioColor(id)">
+                </td>
+            </tr>
+            <!--Fila 2-->
+            <tr>
+                <td>
+                    <input readonly type="text" id="c21" size="2" placeholder="Y">
+                </td>
+                <td>
+                    <input readonly type="text" id="c22" size="2" placeholder="F">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c23" size="2" placeholder="F">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c24" size="2" placeholder="V">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c25" size="2" placeholder="H">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c26" size="2" placeholder="K">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c27" size="2" placeholder="O" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c28" size="2" placeholder="B">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c29" size="2" placeholder="D">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c210" size="2" placeholder="O" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c211" size="2" placeholder="L" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c212" size="2" placeholder="T" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c213" size="2" placeholder="G">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c214" size="2" placeholder="I" onclick="cambioColor(id)">
+                </td>
+            </tr>
+            <!--Fila 3-->
+            <tr>
+                <td>
+                    <input readonly type="text" id="c31" size="2" placeholder="G">
+                </td>
+                <td>
+                    <input readonly type="text" id="c32" size="2" placeholder="E" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c33" size="2" placeholder="D" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c34" size="2" placeholder="O" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c35" size="2" placeholder="R" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c36" size="2" placeholder="T" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c37" size="2" placeholder="C" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c38" size="2" placeholder="E" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c39" size="2" placeholder="L" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c310" size="2" placeholder="E" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c311" size="2" placeholder="V">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c312" size="2" placeholder="I" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c313" size="2" placeholder="H">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c314" size="2" placeholder="K" onclick="cambioColor(id)">
+                </td>
+            </tr>
+            <!--Fila 4-->
+            <tr>
+                <td>
+                    <input readonly type="text" id="c41" size="2" placeholder="J" onclick="cambioColor(id)">
+                </td>
+                <td>
+                    <input readonly type="text" id="c42" size="2" placeholder="O" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c43" size="2" placeholder="L" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c44" size="2" placeholder="T" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c45" size="2" placeholder="E" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c46" size="2" placeholder="O" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c47" size="2" placeholder="N" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c48" size="2" placeholder="T" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c49" size="2" placeholder="C" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c410" size="2" placeholder="N">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c411" size="2" placeholder="I">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c412" size="2" placeholder="M" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c413" size="2" placeholder="D">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c414" size="2" placeholder="A" onclick="cambioColor(id)">
+                </td>
+            </tr>
+            <!--Fila 5-->
+            <tr>
+                <td>
+                    <input readonly type="text" id="c51" size="2" placeholder="S" onclick="cambioColor(id)">
+                </td>
+                <td>
+                    <input readonly type="text" id="c52" size="2" placeholder="W">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c53" size="2" placeholder="O">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c54" size="2" placeholder="N" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c55" size="2" placeholder="E">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c56" size="2" placeholder="E">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c57" size="2" placeholder="O" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c58" size="2" placeholder="T" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c59" size="2" placeholder="O">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c510" size="2" placeholder="J">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c511" size="2" placeholder="L">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c512" size="2" placeholder="E" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c513" size="2" placeholder="G">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c514" size="2" placeholder="C" onclick="cambioColor(id)">
+                </td>
+            </tr>
+            <!--Fila 6-->
+            <tr>
+                <td>
+                    <input readonly type="text" id="c61" size="2" placeholder="T">
+                </td>
+                <td>
+                    <input readonly type="text" id="c62" size="2" placeholder="O" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c63" size="2" placeholder="G" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c64" size="2" placeholder="Q">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c65" size="2" placeholder="B">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c66" size="2" placeholder="R" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c67" size="2" placeholder="A" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c68" size="2" placeholder="K">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c69" size="2" placeholder="R">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c610" size="2" placeholder="A">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c611" size="2" placeholder="X">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c612" size="2" placeholder="N" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c613" size="2" placeholder="K">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c614" size="2" placeholder="H" onclick="cambioColor(id)">
+                </td>
+            </tr>
+            <!--Fila 7-->
+            <tr>
+                <td>
+                    <input readonly type="text" id="c71" size="2" placeholder="G">
+                </td>
+                <td>
+                    <input readonly type="text" id="c72" size="2" placeholder="A" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c73" size="2" placeholder="D" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c74" size="2" placeholder="P">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c75" size="2" placeholder="B" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c76" size="2" placeholder="B" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c77" size="2" placeholder="G">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c78" size="2" placeholder="A">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c79" size="2" placeholder="R">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c710" size="2" placeholder="A">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c711" size="2" placeholder="H">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c712" size="2" placeholder="G" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c713" size="2" placeholder="H">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c714" size="2" placeholder="U" onclick="cambioColor(id)">
+                </td>
+            </tr>
+            <!--Fila 8-->
+            <tr>
+                <td>
+                    <input readonly type="text" id="c81" size="2" placeholder="M" onclick="cambioColor(id)">
+                </td>
+                <td>
+                    <input readonly type="text" id="c82" size="2" placeholder="Y">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c83" size="2" placeholder="G">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c84" size="2" placeholder="P" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c85" size="2" placeholder="U" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c86" size="2" placeholder="H" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c87" size="2" placeholder="C" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c88" size="2" placeholder="I" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c89" size="2" placeholder="A" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c810" size="2" placeholder="R" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c811" size="2" placeholder="U">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c812" size="2" placeholder="A" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c813" size="2" placeholder="K">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c814" size="2" placeholder="V">
+                </td>
+            </tr>
+            <!--Fila 9-->
+            <tr>
+                <td>
+                    <input readonly type="text" id="c91" size="2" placeholder="C">
+                </td>
+                <td>
+                    <input readonly type="text" id="c92" size="2" placeholder="F">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c93" size="2" placeholder="Q">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c94" size="2" placeholder="Z" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c95" size="2" placeholder="A" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c96" size="2" placeholder="Y">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c97" size="2" placeholder="R">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c98" size="2" placeholder="Y">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c99" size="2" placeholder="K">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c910" size="2" placeholder="F">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c911" size="2" placeholder="I">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c912" size="2" placeholder="M" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c913" size="2" placeholder="S">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c914" size="2" placeholder="X">
+                </td>
+            </tr>
+            <!--Fila 10-->
+            <tr>
+                <td>
+                    <input readonly type="text" id="c101" size="2" placeholder="L">
+                </td>
+                <td>
+                    <input readonly type="text" id="c102" size="2" placeholder="S">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c103" size="2" placeholder="Z" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c104" size="2" placeholder="O">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c105" size="2" placeholder="R">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c106" size="2" placeholder="Z" onclick="cambioColor(id)">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c107" size="2" placeholder="H">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c108" size="2" placeholder="Z">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c109" size="2" placeholder="T">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c1010" size="2" placeholder="Q">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c1011" size="2" placeholder="H">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c1012" size="2" placeholder="M">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c1013" size="2" placeholder="W">
+                </td>
+
+                <td>
+                    <input readonly type="text" id="c1014" size="2" placeholder="H">
+                </td>
+            </tr>
+        </form>
+
+            <tr>
+                <p>
+                    Las palabras a buscar en la sopa de letras son:
+                </p>
+            </tr>
+            <tr>
+                <p>                   
+                     ELECTABUZZ, ELECTRODE, JOLTEON, MAGNEMITE, MAGNETON, PIKACHU, RAICHU, VOLTORB, ZAPDOS
+                </p>
+            </tr>
     </table>
 </body>
 

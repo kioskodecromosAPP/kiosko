@@ -160,11 +160,16 @@ async function rellenarDatosPerfil() {
     
     const promise = getColecciones(document.cookie);
     promise.then(colecciones =>{
-        for(var i=0;i<colecciones.length;i++){
-            document.getElementById("colecciones").innerHTML += colecciones[i].NOMBRE;
-            document.getElementById("colecciones").innerHTML += "<br>";
-
+        for (var i = 0; i < colecciones.length; i++) {
+            let button = document.createElement("button");
+            button.id = 'colec' + i;
+            button.className = 'colec';
+            button.innerHTML = colecciones[i].NOMBRE;
+            button.onclick =  mostrarColecciones()
+            document.getElementById("colecciones").appendChild(button);
         }
+
+
     })
 }
 

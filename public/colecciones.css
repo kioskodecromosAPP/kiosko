@@ -12,13 +12,24 @@ html {
     justify-content: space-evenly;
 }
 
-button {
+.botonEspecial {
     text-decoration: none;
     padding: 10px;
     font-size: 20px;
     border: 1px solid black;
     text-align: center;
     width: 200px;
+    height: 40px;
+    background-color: bisque;
+    color: black;
+}
+
+button {
+    text-decoration: none;
+    font-size: 20px;
+    border: 1px solid black;
+    text-align: center;
+    width: 100px;
     height: 40px;
     background-color: bisque;
     color: black;

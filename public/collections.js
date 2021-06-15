@@ -4,8 +4,8 @@ function cogerCarta(id) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({"idCarta": id})
-    }).then(response => response.json().then(function (json) {
+        body: JSON.stringify({ "idCarta": id })
+    }).then(response => response.json().then(function(json) {
         return json;
     }));
 }
@@ -16,12 +16,44 @@ function mostrarCartas() {
         headers: {
             'Content-Type': 'application/json'
         },
-    }).then(response => response.json().then(async function (text) {
+    }).then(response => response.json().then(async function(text) {
         return JSON.parse(text);
     }));
 }
 
-async function editarHTML () {
+//MÉTODO PARA COMPROBAR QUE EL USUARIO PUEDE COMPRAR EL CROMO SI TIENE PUNTOS SUFICIENTES
+function comprobarPuntos(id, cartas) {
+    var emailUs = document.cookie;
+    var puntosUs = datos(emailUs);
+    console.log(puntosUs);
+    if (cartas[i].NUMCOPIAS != 0) {
+        alert("No hay más unidades de este cromo disponibles");
+    } else if (cartas[id].PRECIO <= puntosUs) { //SE PUEDE COMPRAR EL CROMO
+        comprar(cartas[id], emailUs);
+    } else {
+        alert("No tienes suficientes puntos para comprar el cromo");
+    }
+}
+
+//FUNCIÓN PARA COMPRAR UN CROMO
+function comprar(carta, email) {
+
+}
+
+async function datos(email) {
+    const response = await fetch('/datos', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ "email": email })
+    })
+    const aux = await response.json();
+    console.log(aux);
+    return aux.PUNTOS;
+}
+
+async function editarHTML() {
     let cartas = await mostrarCartas();
     for (let i = 0; i < cartas.length; i++) {
         let htmlElement = document.createElement('div');
@@ -32,7 +64,44 @@ async function editarHTML () {
         htmlElement = document.createElement('img');
         htmlElement.src = cartas[i].IMAGEN;
         htmlElement.className = 'image';
-        document.getElementById("cromo"+i).appendChild(htmlElement);
+
+        let htmlElement2 = document.createElement('div');
+        htmlElement2.id = 'cromo' + i;
+        document.getElementById("principal").appendChild(htmlElement2);
+
+        htmlElement2.textContent = "Número de copias disponibles: " + cartas[i].NUMCOPIAS;
+
+        let htmlElement3 = document.createElement('div');
+        htmlElement3.id = 'cromo' + i;
+        document.getElementById("principal").appendChild(htmlElement3);
+
+        htmlElement3.textContent = "Nombre del cromo: " + cartas[i].ID;
+
+        let htmlElement4 = document.createElement('div');
+        htmlElement4.id = 'cromo' + i;
+        document.getElementById("principal").appendChild(htmlElement4);
+
+        htmlElement4.textContent = "Albúm: " + cartas[i].IDALBUM;
+
+        let htmlElement5 = document.createElement('div');
+        htmlElement5.id = 'cromo' + i;
+        document.getElementById("principal").appendChild(htmlElement5);
+
+        htmlElement5.textContent = "Precio: " + cartas[i].PRECIO + " puntos";
+
+        var boton = document.createElement("button");
+        boton.innerHTML = "Comprar";
+
+        boton.onclick = function() {
+            comprobarPuntos(i, cartas);
+        };
+
+        document.getElementById("cromo" + i).appendChild(htmlElement);
+        document.getElementById("cromo" + i).appendChild(htmlElement2);
+        document.getElementById("cromo" + i).appendChild(htmlElement3);
+        document.getElementById("cromo" + i).appendChild(htmlElement4);
+        document.getElementById("cromo" + i).appendChild(htmlElement5);
+        document.getElementById("cromo" + i).appendChild(boton);
     }
-    
+
 }

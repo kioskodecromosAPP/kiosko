@@ -234,3 +234,7 @@ function comprobarSol(respuestas) {
         return JSON.parse(text);
     }));
 }
+
+function cambioColor(id){
+    document.getElementById(id).style.backgroundColor = "#11FF00";
+}

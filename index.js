@@ -35,25 +35,63 @@ const connection = mysql.createConnection({
 });
 
 try {
-    connection.connect(function (err) {
+    connection.connect(function(err) {
         if (err) throw err;
     });
 } catch (err) {
     console.log("Error al abrir la BD");
 }
 
-app.post('/getcarta', function (req, res) {
+app.post('/getcarta', function(req, res) {
     pokemon.card.find(req.body.id)
         .then(card => {
             console.log(card);
             res.send(card);
         });
+});
+
+app.post('/comprarCarta', function(req, res) {
+    //PRIMERO HAY QUE QUITAR UNA UNIDAD A LA CARTA
+    connection.query("UPDATE cromos SET NUMCOPIAS = (NUMCOPIAS - 1) WHERE ID =?", [req.body.id], async(err, result) => {
+        if (err) {
+            res.status(400).send();
+        }
+    })
+
+
+    //DESPUES ASIGNAMOS EL ID DE LA CARTA AL USUARIO
+
+    connection.query("UPDATE colecciones SET NUMCROMOS = (NUMCROMOS + ' ' + ? ) WHERE USUARIOEMAIL = ?", [req.body.id, req.body.email], async(er, result) => {
+        if (err) {
+            res.status(400).send();
+        }
+    })
+
 })
 
+app.post('/buscarColecciones', function(req, res) {
+    //PRIMERO HAY QUE QUITAR UNA UNIDAD A LA CARTA
+    connection.query("SELECT COUNT(*) as total FROM COLECCIONES WHERE EMAIL=?", [req.body.id], async(err, result) => {
+        if (err) throw err;
+        console.log(result);
+        console.log(result[0].total);
+        res.send(result[0].total);
+    })
 
-app.get('/getCartasMostrar', function (req, res) {
 
-    connection.query("SELECT * FROM CROMOS", function (err, result) {
+    //DESPUES ASIGNAMOS EL ID DE LA CARTA AL USUARIO
+
+    connection.query("UPDATE colecciones SET NUMCROMOS = (NUMCROMOS + ' ' + ? ) WHERE USUARIOEMAIL = ?", [req.body.id, req.body.email], async(er, result) => {
+        if (err) {
+            res.status(400).send();
+        }
+    })
+
+})
+
+app.get('/getCartasMostrar', function(req, res) {
+
+    connection.query("SELECT * FROM CROMOS", function(err, result) {
         try {
             if (err) throw err;
             if (result.length > 0) {
@@ -77,8 +115,8 @@ app.get('/getCartasMostrar', function (req, res) {
 })
 
 
-app.get('/getNewCard', function (req, res) {
-    connection.query("SELECT * FROM ALBUMES", async function (err, result) {
+app.get('/getNewCard', function(req, res) {
+    connection.query("SELECT * FROM ALBUMES", async function(err, result) {
         try {
             if (err) throw err;
             if (result.length > 0) {
@@ -89,7 +127,7 @@ app.get('/getNewCard', function (req, res) {
                 let numTotal = await response.count;
                 let listaCartas = []
                 let listaId = []
-                //console.log(numTotal+"NUMTOTAL");
+                    //console.log(numTotal+"NUMTOTAL");
                 for (let i = 0; i < 6; i++) {
                     let id = result[numRam].ID + "-" + Math.floor(Math.random() * (numTotal - 1) + 1).toString();
                     if (listaId.indexOf(id) === -1) {
@@ -145,8 +183,8 @@ async function comprobarAlbum(id) {
     return existe;
 }
 
-app.post('/login', function (req, res) {
-    connection.query("SELECT * FROM USUARIOS WHERE EMAIL= ? and CONTRASENYA = ?", [req.body.email, req.body.password], function (err, result, fields) {
+app.post('/login', function(req, res) {
+    connection.query("SELECT * FROM USUARIOS WHERE EMAIL= ? and CONTRASENYA = ?", [req.body.email, req.body.password], function(err, result, fields) {
         try {
             if (err) throw err;
             if (result.length != 0) {
@@ -163,9 +201,9 @@ app.post('/login', function (req, res) {
 });
 
 
-app.post('/colecciones', function (req, res) {
+app.post('/colecciones', function(req, res) {
 
-    connection.query("SELECT * FROM COLECCIONES WHERE USUARIOEMAIL=?", [req.body.email], async (err, result) => {
+    connection.query("SELECT * FROM COLECCIONES WHERE USUARIOEMAIL=?", [req.body.email], async(err, result) => {
         var string = JSON.stringify(result);
         var json = JSON.parse(string);
         res.send(json);
@@ -174,26 +212,21 @@ app.post('/colecciones', function (req, res) {
 
 });
 
-
-app.post('/actualizarPuntos', function (req, res) {
-
-
-    connection.query("UPDATE usuarios SET PUNTOS = (PUNTOS + ?) WHERE EMAIL = ?", [req.body.puntos, req.body.email], async (err, result) => {
-        if(err){
+app.post('/actualizarPuntos', function(req, res) {
+    connection.query("UPDATE usuarios SET PUNTOS = (PUNTOS - ?) WHERE EMAIL = ?", [req.body.puntos, req.body.email], async(err, result) => {
+        if (err) {
             res.status(400).send();
         }
     })
-
-
 });
 
-app.post('/crearCol', function(req,res){
+app.post('/crearCol', function(req, res) {
     let aux = comprobarAlbum(req.body.id);
 
-    if(aux == false){
+    if (aux == false) {
         req.status(300).send();
-    }else{
-        var query = connection.query('INSERT INTO COLECCIONES(NOMBRE,IDALBUM,USUARIOEMAIL,ESTADO,NUMCROMOS) VALUES(?, ?, ?, ?, ?)', [req.body.nombreColeccion, req.body.id, req.body.email, '0', '0'], async (err, result) => {
+    } else {
+        var query = connection.query('INSERT INTO COLECCIONES(NOMBRE,IDALBUM,USUARIOEMAIL,ESTADO,NUMCROMOS) VALUES(?, ?, ?, ?, ?)', [req.body.nombreColeccion, req.body.id, req.body.email, '0', '0'], async(err, result) => {
             if (err) {
                 res.status(400).send();
                 throw err;
@@ -204,7 +237,7 @@ app.post('/crearCol', function(req,res){
     }
 });
 
-app.post('/registro', function (req, res) {
+app.post('/registro', function(req, res) {
     console.log(req.body);
     //COMPROBAMOS QUE NO EXISTE UN EMAIL IGUAL
     let aux = comprobarIdUnico(req.body.email);
@@ -214,7 +247,7 @@ app.post('/registro', function (req, res) {
     } else {
         //GUARDAMOS AL USUARIO EN LA BASE DE DATOS
 
-        var query = connection.query('INSERT INTO USUARIOS(NOMBRE,APELLIDOS,EMAIL,ESADMIN,CONTRASENYA,PUNTOS) VALUES(?, ?, ?, ?, ?,?)', [req.body.name, req.body.apellidos, req.body.email, '0', req.body.contrasenya, '0'], async (err, result) => {
+        var query = connection.query('INSERT INTO USUARIOS(NOMBRE,APELLIDOS,EMAIL,ESADMIN,CONTRASENYA,PUNTOS) VALUES(?, ?, ?, ?, ?,?)', [req.body.name, req.body.apellidos, req.body.email, '0', req.body.contrasenya, '0'], async(err, result) => {
             if (err) {
                 res.status(400).send();
                 throw err;
@@ -226,9 +259,9 @@ app.post('/registro', function (req, res) {
 
 });
 
-app.post('/datos', function (req, res) {
+app.post('/datos', function(req, res) {
 
-    connection.query("SELECT * FROM USUARIOS WHERE EMAIL=?", [req.body.email], async (err, result) => {
+    connection.query("SELECT * FROM USUARIOS WHERE EMAIL=?", [req.body.email], async(err, result) => {
         var string = JSON.stringify(result);
         var json = JSON.parse(string);
         //console.log(json[0]);
@@ -251,7 +284,7 @@ function palabraCorrecta(respuesta) {
     return counter;
 }
 
-app.post('/preguntas', function (req, res) {
+app.post('/preguntas', function(req, res) {
     console.log(req.body);
     const correcta = palabraCorrecta(req.body.respuestas);
     console.log(correcta);

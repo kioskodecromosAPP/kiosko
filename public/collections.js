@@ -21,31 +21,23 @@ function mostrarCartas() {
     }));
 }
 
-//MÉTODO PARA COMPROBAR QUE EL USUARIO PUEDE COMPRAR EL CROMO SI TIENE PUNTOS SUFICIENTES
-function comprobarPuntos(id, cartas) {
-    var emailUs = document.cookie;
-    var puntosUs = datos(emailUs);
-    console.log(puntosUs);
-    if (cartas[i].NUMCOPIAS != 0) {
-        alert("No hay más unidades de este cromo disponibles");
-    } else if (cartas[id].PRECIO <= puntosUs) { //SE PUEDE COMPRAR EL CROMO
-        comprar(cartas[id], emailUs);
-    } else {
-        alert("No tienes suficientes puntos para comprar el cromo");
-    }
-}
-
 //FUNCIÓN PARA COMPRAR UN CROMO
 function comprar(carta, email) {
     //COMPROBAMOS SI EL USUARIO TIENE ALGUNA COLECCIÓN PARA GUARDAR EL CROMO A COMPRAR
     let aux = buscarColecciones(email);
+    console.log(aux);
     let puntosUs = datos(email);
+    console.log(puntosUs);
     if (aux != 0) {
         //SI TIENE ALGUNA COLECCIÓN DISPONIBLE COMPROBAMOS SI TIENE PUNTOS SUFICIENTES
         if (carta.PUNTOS <= puntosUs) {
-            //SI TIENE PUNTOS PODEMOS COMPRAR EL CROMO
-            //PRIMERO ELIGE LA COLECCION DONDE DEBE IR
-            elegirColeccion(email, carta.PUNTOS);
+            if (cartas[i].NUMCOPIAS != 0) {
+                alert("No hay más unidades de este cromo disponibles");
+            } else {
+                //SI TIENE PUNTOS Y HAY STOCK PODEMOS COMPRAR EL CROMO
+                //PRIMERO ELIGE LA COLECCION DONDE DEBE IR
+                elegirColeccion(email, carta.PUNTOS);
+            }
         } else {
             alert("No dispone de puntos necesarios para comprar este cromo");
         }
@@ -72,6 +64,7 @@ async function buscarColecciones(email) {
 function elegirColeccion(email, puntos) {
     //CUESTIONARIO PARA PREGUNTAR POR LA COLECCION DONDE QUIERE GUARDAR EL CROMO
     //SI SE HA ELEGIDO CORRECTAMENTE : COMPRAMOS
+    var coleccion = prompt("¿En que colección quiere añadir el cromo?");
     puntosUs(email, puntos);
     //RESTAR STOCK DE CROMOS
 }
@@ -82,7 +75,7 @@ async function puntosUs(email, puntos) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ "puntos": puntos, "email": email })
+        body: JSON.stringify({ "puntos": -puntos, "email": email })
     })
 }
 
@@ -139,7 +132,8 @@ async function editarHTML() {
         boton.innerHTML = "Comprar";
 
         boton.onclick = function() {
-            comprobarPuntos(i, cartas);
+            var email = document.cookie;
+            comprar(cartas[i], email);
         };
 
         document.getElementById("cromo" + i).appendChild(htmlElement);

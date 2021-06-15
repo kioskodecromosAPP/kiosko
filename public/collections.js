@@ -21,28 +21,54 @@ function mostrarCartas() {
     }));
 }
 
+async function getColecciones(email) {
+    const response = await fetch('/colecciones', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ "email": email })
+    })
+    const aux = await response.json();
+    console.log(aux[0].NOMBRE);
+    return aux;
+}
+
+async function getAlbumes(id) {
+    const response = await fetch('/albumes', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ "id": id })
+    })
+    const aux = await response.json();
+    return aux;
+}
+
 //FUNCIÓN PARA COMPRAR UN CROMO
-function comprar(carta, email) {
-    //COMPROBAMOS SI EL USUARIO TIENE ALGUNA COLECCIÓN PARA GUARDAR EL CROMO A COMPRAR
-    let aux = buscarColecciones(email);
-    console.log(aux);
-    let puntosUs = datos(email);
-    console.log(puntosUs);
-    if (aux != 0) {
+async function comprar(carta, email) {
+    //COMPROBAMOS SI EL USUARIO TIENE ALGUNA COLECCIÓN PARA GUARDAR EL CROMO A COMPRARi
+    let numColeciones = await buscarColecciones(email);
+    let puntosUs = await datos(email);
+    console.log(numColeciones.numCol)
+    console.log(puntosUs)
+
+    if (numColeciones.numCol != 0) {
         //SI TIENE ALGUNA COLECCIÓN DISPONIBLE COMPROBAMOS SI TIENE PUNTOS SUFICIENTES
-        if (carta.PUNTOS <= puntosUs) {
-            if (cartas[i].NUMCOPIAS != 0) {
+        if (carta.PRECIO <= puntosUs) {
+            if (carta.NUMCOPIAS == 0) {
                 alert("No hay más unidades de este cromo disponibles");
             } else {
                 //SI TIENE PUNTOS Y HAY STOCK PODEMOS COMPRAR EL CROMO
                 //PRIMERO ELIGE LA COLECCION DONDE DEBE IR
-                elegirColeccion(email, carta.PUNTOS);
+                elegirColeccion(email, carta, puntosUs);
             }
         } else {
             alert("No dispone de puntos necesarios para comprar este cromo");
         }
     } else {
-        alert("No dispone de colecciones. Debe crear una para poder comprar cromos");
+        alert("No tiene ninguna colección. Debe crear una para comprar cromos");
     }
 }
 
@@ -55,29 +81,92 @@ async function buscarColecciones(email) {
         },
         body: JSON.stringify({ "email": email })
     })
-    const aux = await response.json();
-    console.log(aux);
-    return aux;
+    const json = await response.json();
+    console.log(json);
+    return json;
 }
 
-//FUNCIÓN PARA ELEGIR LA COLECCIÓN DONDE GUARDAR EL CROMO
-function elegirColeccion(email, puntos) {
-    //CUESTIONARIO PARA PREGUNTAR POR LA COLECCION DONDE QUIERE GUARDAR EL CROMO
-    //SI SE HA ELEGIDO CORRECTAMENTE : COMPRAMOS
-    var coleccion = prompt("¿En que colección quiere añadir el cromo?");
-    puntosUs(email, puntos);
-    //RESTAR STOCK DE CROMOS
-}
-
-async function puntosUs(email, puntos) {
-    const response = await fetch('/actualizarPuntos', {
+function puntosUs(email, puntos, puntosUs) {
+    let puntoAc = puntosUs - puntos;
+    fetch('/upPuntos', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ "puntos": -puntos, "email": email })
+        body: JSON.stringify({ "email": email, "puntos": puntoAc })
+    })
+
+}
+
+function stock(carta) {
+    fetch('/upStock', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ "id": carta.ID })
     })
 }
+
+function anadirUser(carta) {
+    console.log(carta);
+    fetch('/upUser', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ "id": carta.ID, "imagen": carta.IMAGEN, "idalbum": carta.IDALBUM })
+    })
+}
+
+function anadirAlbum(id, idCol) {
+    fetch('/addAlbum', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ "id": id, "idCol": idCol })
+    })
+}
+
+//FUNCIÓN PARA ELEGIR LA COLECCIÓN DONDE GUARDAR EL CROMO
+async function elegirColeccion(email, carta, puntosUser) {
+    //CUESTIONARIO PARA PREGUNTAR POR LA COLECCION DONDE QUIERE GUARDAR EL CROMO
+    //SI SE HA ELEGIDO CORRECTAMENTE : COMPRAMOS
+    let colecciones = await getColecciones(email);
+    let respuesta = prompt("Elija sabiamente, sobre las colecciones existentes:")
+    if (respuesta != null) {
+        respuesta = respuesta.toLowerCase();
+        for (let i = 0; i < colecciones.length; i++) {
+            if (respuesta == colecciones[i].NOMBRE && carta.IDALBUM == colecciones[i].IDALBUM) {
+                let albumes = await getAlbumes(colecciones[i].IDCOLUSER);
+                if (albumes.length == 0) {
+                    var albumNuevo = confirm("¿Quieres comprar un album? Es necesario para comprar un cromo");
+                    if (albumNuevo) {
+                        anadirAlbum(carta.IDALBUM, colecciones[i].IDCOLUSER);
+                        puntosUs(email, carta.PRECIO, puntosUser);
+                        stock(carta);
+                        anadirUser(carta);
+                    } else {
+                        alert("No puede seguir con la compra");
+                        return;
+                    }
+                } else if (albumes[0].ID != carta.IDALBUM) {
+                    alert("No tienes el album de este cromo");
+                } else {
+                    puntosUs(email, carta.PRECIO, puntosUser);
+                    stock(carta);
+                    anadirUser(carta);
+                }
+            } else {
+                alert("VUELVA A ELEGIR OTRA VEZ.")
+            }
+        }
+    }
+
+    //RESTAR STOCK DE CROMOS
+}
+
 
 async function datos(email) {
     const response = await fetch('/datos', {
@@ -146,9 +235,9 @@ async function editarHTML() {
 
 }
 
-async function pepe(){
+async function pepe() {
     var id = document.cookie.split("_");
-    const response = await fetch('/getCartasUsuario',{
+    const response = await fetch('/getCartasUsuario', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -170,7 +259,7 @@ async function pepe(){
 
 
         document.getElementById("cromo" + i).appendChild(htmlElement);
-    
+
     }
 
 }

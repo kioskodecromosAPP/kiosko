@@ -47,7 +47,7 @@ function getPuntos() {
     return puntosGlobal;
 }
 
-function getEsAdmin(){
+function getEsAdmin() {
     return esAdminGlobal;
 }
 
@@ -173,7 +173,7 @@ async function rellenarDatosPerfil() {
             button.className = 'colec' + i;
             console.log(colecciones[i].IDCOLUSER)
             button.innerHTML = colecciones[i].NOMBRE;
-            button.onclick = button.onclick =  function () {
+            button.onclick = button.onclick = function() {
                 document.cookie = getEmail();
                 document.cookie += "_";
                 document.cookie += colecciones[i].IDCOLUSER;
@@ -261,7 +261,7 @@ function comprobarSol(respuestas) {
         },
         body: JSON.stringify({ "respuestas": respuestas })
 
-    }).then(response => response.json().then(async function (text) {
+    }).then(response => response.json().then(async function(text) {
         return JSON.parse(text);
     }));
 }
@@ -344,13 +344,13 @@ function cambioColor(id) {
 
 }
 
-function cambiarEstado(){
-    const nombreCol= document.getElementById("nombreCol").value;
+function cambiarEstado() {
+    const nombreCol = document.getElementById("nombreCol").value;
     const estado = document.getElementById("estadoCol").value;
-    
+
     console.log(nombreCol);
     console.log(estado);
-    
+
     fetch('/actividadesAdmin', {
         method: 'POST',
         headers: {
@@ -368,15 +368,15 @@ function cambiarEstado(){
             alert("No hay ninguna colección con ese nombre");
         }
     });
+}
+
+async function usuarioAdmin() {
+    await datos(document.cookie.split("_"));
+    console.log(document.cookie);
+    var esAdmin = getEsAdmin();
+    console.log(getEsAdmin());
+
+    if (esAdmin == 0) {
+        document.getElementById("botonActividadesAdmin").style.display = 'none';
     }
-    
-    async function usuarioAdmin(){
-        await datos(document.cookie.split("_"));
-        console.log(document.cookie);
-        var esAdmin=getEsAdmin();
-        console.log(getEsAdmin());
-    
-        if(esAdmin==0){
-            document.getElementById("botonActividadesAdmin").style.display='none';
-        }
-    }
+}

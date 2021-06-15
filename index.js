@@ -153,7 +153,7 @@ app.post('/colecciones', function (req, res) {
     connection.query("SELECT * FROM COLECCIONES WHERE USUARIOEMAIL=?", [req.body.email], async (err, result) => {
         var string = JSON.stringify(result);
         var json = JSON.parse(string);
-        res.send(json[0]);
+        res.send(json);
     })
 
 

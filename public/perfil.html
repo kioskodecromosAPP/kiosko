@@ -64,8 +64,16 @@
                 <!--AQUÍ IRÁN LAS COLECCIONES DE CADA USUARIO-->
                 <div id="colecciones" align="center"></div>
                 <div align="center" style="padding-top: 10px;">
-                    <a href="crearColeccion.html"><button type="button " id="pagAct " style="text-align:center; ">Crear
-                            Coleccion</button></a>
+                    <form>
+                        <label for="nombreColeccion"><b>Nombre de la Coleccion</b></label> <br>
+                        <input type="text" placeholder="Nombre Coleccion" id="nombreColeccion" required
+                            size="30"><br><br>
+
+                        <label for="nombreAlbum"><b>Id del Album</b></label><br>
+                        <input type="text" placeholder="Nombre Album" id="nombreAlbum" required size="30"><br><br>
+
+                        <button type="submit" class="btn" onclick="crearColeccion()">Crear Coleccion</button> <br><br>
+                    </form>
                 </div>
             </td>
 

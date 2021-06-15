@@ -197,6 +197,30 @@ function resolverPreguntas() {
     })
 }
 
+function crearColeccion(){
+    const nombreColeccion = document.getElementById("nombreColeccion").value;
+    const id = document.getElementById("nombreAlbum").value;
+
+    fetch('/crearCol', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ "nombreColeccion": nombreColeccion, "id": id})
+    }).then(response => {
+        console.log(response.status);
+        if (response.status == 400) {
+            alert("El registro ha sido incorrecto");
+        } else if (response.status == 200) {
+            crearCookie(email);
+            alert("El registro es correcto");
+            window.location.replace("./perfil.html");
+        } else {
+            alert("El album con ese nombre no existe");
+        }
+    });
+}
+
 function comprobarSol(respuestas) {
 
     return fetch("/preguntas", {

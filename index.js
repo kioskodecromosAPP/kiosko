@@ -130,6 +130,21 @@ async function comprobarIdUnico(email) {
 }
 
 
+async function comprobarAlbum(id) {
+    var existe = false;
+
+    await connection.query("SELECT COUNT (*) as total FROM ALBUMES WHERE ID=?", [id], (err, result) => {
+        if (err) throw err;
+        console.log(result);
+        console.log(result[0].total);
+        if (result[0].total != 0) {
+            existe = true;
+        }
+    })
+
+    return existe;
+}
+
 app.post('/login', function (req, res) {
     connection.query("SELECT * FROM USUARIOS WHERE EMAIL= ? and CONTRASENYA = ?", [req.body.email, req.body.password], function (err, result, fields) {
         try {
@@ -159,6 +174,13 @@ app.post('/colecciones', function (req, res) {
 
 });
 
+app.post('crearCol', function(req,res){
+    let aux = comprobarAlbum(req.body.id);
+
+    if(aux == false){
+        req.status(300).send();
+    }
+})
 
 app.post('/registro', function (req, res) {
     console.log(req.body);

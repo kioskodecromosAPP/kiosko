@@ -10,8 +10,10 @@
     <title>Perfil</title>
     <h1>- PERFIL -</h1>
     <div style="text-align: right;">
-        <a href="paginaInicio.html"><button type="button " id="paginaInicio" style="text-align:center;">Volver al inicio</button></a>
-        <a href="index.html"><button type="button" id="cerrarSesion" onclick="cerrarSesion()" style="text-align:center;">Cerrar sesión</button></a>
+        <a href="paginaInicio.html"><button type="button " id="paginaInicio" style="text-align:center;">Volver al
+                inicio</button></a>
+        <a href="index.html"><button type="button" id="cerrarSesion" onclick="cerrarSesion()"
+                style="text-align:center;">Cerrar sesión</button></a>
     </div>
 
     <table width="100%" style="margin-top: 10px;">
@@ -30,46 +32,54 @@
 
             <td width="20%">
                 <div style="background-color: bisque; padding: 10px;height: 50px;width: 400px; text-align: center;">
-                    ¿Quieres ganar puntos extras para expandir tu colección de cromos? Participa en nuestras actividades para ver cuánto sabes de cromos:
+                    ¿Quieres ganar puntos extras para expandir tu colección de cromos? Participa en nuestras actividades
+                    para ver cuánto sabes de cromos:
                 </div>
 
                 <div align="center" style="padding-top: 10px;">
-                    <a href="actividades.html "><button type="button " id="pagAct " style="text-align:center; ">Actividades</button></a>
+                    <a href="actividades.html "><button type="button " id="pagAct "
+                            style="text-align:center; ">Actividades</button></a>
                 </div>
             </td>
 
-            <tr>
-                <td>
-                    <div>
-                        <label for="nombre"><b>Nombre:</b></label> <br>
-                        <input type="text" id="nombrePerfil" size="30" readonly><br><br>
+        <tr>
+            <td>
+                <div>
+                    <label for="nombre"><b>Nombre:</b></label> <br>
+                    <input type="text" id="nombrePerfil" size="30" readonly><br><br>
 
-                        <label for="apellidos"><b>Apellidos:</b></label><br>
-                        <input type="text" id="apellidosPerfil" size="30" readonly><br><br>
+                    <label for="apellidos"><b>Apellidos:</b></label><br>
+                    <input type="text" id="apellidosPerfil" size="30" readonly><br><br>
 
-                        <label for="em"><b>Email:</b></label><br>
-                        <input type="text" id="emPerfil" size="30" readonly><br><br>
+                    <label for="em"><b>Email:</b></label><br>
+                    <input type="text" id="emPerfil" size="30" readonly><br><br>
 
-                        <img id="destacada" src=fotoMoneda.png align="left">
-                        <label for="puntos"><b>Puntos:</b></label><br><br>
-                        <input type="text" id="puntosPerfil" size="5" readonly><br><br>
-                    </div>
-                </td>
+                    <img id="destacada" src=fotoMoneda.png align="left">
+                    <label for="puntos"><b>Puntos:</b></label><br><br>
+                    <input type="text" id="puntosPerfil" size="5" readonly><br><br>
+                </div>
+            </td>
 
-                <td>
-                    <!--AQUÍ IRÁN LAS COLECCIONES DE CADA USUARIO-->
-                </td>
+            <td>
+                <!--AQUÍ IRÁN LAS COLECCIONES DE CADA USUARIO-->
+                <div id="colecciones" align="center"></div>
+                <div align="center" style="padding-top: 10px;">
+                    <a href="crearColeccion.html"><button type="button " id="pagAct " style="text-align:center; ">Crear
+                            Coleccion</button></a>
+                </div>
+            </td>
 
-                <td>
-                    <div style="background-color: bisque; padding: 10px;height: 50px;width: 400px; text-align: center;">
-                        ¿Quieres hacerte con más cromos y aumentar tu colección? Compra ahora en nuestra tienda:
-                    </div>
+            <td>
+                <div style="background-color: bisque; padding: 10px;height: 50px;width: 400px; text-align: center;">
+                    ¿Quieres hacerte con más cromos y aumentar tu colección? Compra ahora en nuestra tienda:
+                </div>
 
-                    <div align="center" style="padding-top: 10px;">
-                        <a href="tienda.html"><button type="button " id="pagAct " style="text-align:center; ">Tienda</button></a>
-                    </div>
-                </td>
-            </tr>
+                <div align="center" style="padding-top: 10px;">
+                    <a href="tienda.html"><button type="button " id="pagAct "
+                            style="text-align:center; ">Tienda</button></a>
+                </div>
+            </td>
+        </tr>
     </table>
 </body>
 

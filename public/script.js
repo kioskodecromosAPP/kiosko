@@ -12,6 +12,19 @@ function comprobarLogueo() {
     }
 }
 
+async function getColecciones(email){
+    const response = await fetch('/colecciones', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ "email": email })
+    }) 
+    const aux = await response.json();
+    console.log(aux.NOMBRE);
+    return aux;
+}
+
 function getEmail() {
     return emailGlobal;
 }
@@ -132,7 +145,7 @@ function login() {
 }
 
 function crearCookie(email) {
-    document.cookie = email + "; max-age=60";
+    document.cookie = email + "; max-age=1800";
     console.log(email);
     console.log(document.cookie);
     cookieCreada = true;
@@ -144,6 +157,15 @@ async function rellenarDatosPerfil() {
     document.getElementById("apellidosPerfil").value = getApellidos();
     document.getElementById("emPerfil").value = getEmail();
     document.getElementById("puntosPerfil").value = getPuntos();
+    
+    const promise = getColecciones(document.cookie);
+    promise.then(colecciones =>{
+        for(var i=0;i<colecciones.length;i++){
+            document.getElementById("colecciones").innerHTML += colecciones[i].NOMBRE;
+            document.getElementById("colecciones").innerHTML += "<br>";
+
+        }
+    })
 }
 
 function cerrarSesion() {

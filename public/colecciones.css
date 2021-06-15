@@ -1,9 +1,6 @@
-
 body,
 html {
-    width: fit-content;
-    height: fit-content;
-    background-color: #646E78;
+    background-color: azure;
 }
 
 .principal {
@@ -11,14 +8,21 @@ html {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     grid-gap: 100px;
-    margin-left: 65%;
+    margin-left: 5%;
     justify-content: space-evenly;
-
-
-
 }
 
-.principal > div {
+.principal>div {
     width: fit-content;
     height: fit-content;
+}
+
+h1 {
+    color: black;
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 32px;
+    font-weight: bold;
+    background-color: bisque;
+    padding: 40px;
 }

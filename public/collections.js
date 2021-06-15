@@ -151,3 +151,11 @@ async function editarHTML() {
     }
 
 }
+
+function getColecciones(id) {
+    return fetch("/getCol", {
+        method: "GET",
+    }).then(response => response.json().then(function(json) {
+        return json;
+    }));
+}

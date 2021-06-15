@@ -13,14 +13,14 @@ function comprobarLogueo() {
     }
 }
 
-async function getColecciones(email){
+async function getColecciones(email) {
     const response = await fetch('/colecciones', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({ "email": email })
-    }) 
+    })
     const aux = await response.json();
     console.log(aux.NOMBRE);
     return aux;
@@ -158,21 +158,33 @@ async function rellenarDatosPerfil() {
     document.getElementById("apellidosPerfil").value = getApellidos();
     document.getElementById("emPerfil").value = getEmail();
     document.getElementById("puntosPerfil").value = getPuntos();
-    
+
     const promise = getColecciones(document.cookie);
-    promise.then(colecciones =>{
-        for (var i = 0; i < colecciones.length; i++) {
+    promise.then(colecciones => {
+        console.log(colecciones)
+        for (let i = 0; i < colecciones.length; i++) {
             let button = document.createElement("button");
             button.id = 'colec' + i;
-            button.className = 'colec';
+            button.className = 'colec' + i;
+            console.log(colecciones[i].IDCOLUSER)
             button.innerHTML = colecciones[i].NOMBRE;
-            button.onclick =  mostrarColecciones()
+            button.onclick = button.onclick = async function () {
+                await fetch('/getCol', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ "id": colecciones[i].IDCOLUSER })
+                });
+
+                window.location.replace("/colecciones.html")
+            };
             document.getElementById("colecciones").appendChild(button);
         }
 
-
     })
 }
+
 
 function cerrarSesion() {
     var aux = document.cookie;
@@ -200,24 +212,24 @@ function resolverPreguntas() {
         alert("Has acertado " + respuestas + " preguntas");
         puntos = respuestas * 5;
         document.getElementById("puntosObtenidos").value = puntos;
-        
+
         fetch('/actualizarPuntos', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ "email": document.cookie, "puntos":puntos})
+            body: JSON.stringify({ "email": document.cookie, "puntos": puntos })
         }).then(response => {
-            if(response.status == 400){
+            if (response.status == 400) {
                 alert("La suma de los puntos ha sido errónea.")
             }
         })
 
     });
-    
+
 }
 
-function crearColeccion(){
+function crearColeccion() {
     const nombreColeccion = document.getElementById("nombreColeccion").value;
     const id = document.getElementById("nombreAlbum").value;
 
@@ -226,13 +238,12 @@ function crearColeccion(){
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ "nombreColeccion": nombreColeccion, "id": id, "email": document.cookie})
+        body: JSON.stringify({ "nombreColeccion": nombreColeccion, "id": id, "email": document.cookie })
     }).then(response => {
         console.log(response.status);
         if (response.status == 400) {
             alert("El registro ha sido incorrecto");
         } else if (response.status == 200) {
-            crearCookie(email);
             alert("El registro de coleccion es correcto");
             window.location.replace("./perfil.html");
         } else {
@@ -250,72 +261,72 @@ function comprobarSol(respuestas) {
         },
         body: JSON.stringify({ "respuestas": respuestas })
 
-    }).then(response => response.json().then(async function(text) {
+    }).then(response => response.json().then(async function (text) {
         return JSON.parse(text);
     }));
 }
 
-function cambioColor(id){
-    var puntos=0;
-    var counter=0;
+function cambioColor(id) {
+    var puntos = 0;
+    var counter = 0;
     document.getElementById(id).style.backgroundColor = "#11FF00";
-    clicados=clicados+" "+id;
+    clicados = clicados + " " + id;
 
-    if(clicados.includes('c114') && clicados.includes('c214') && clicados.includes('c314') && clicados.includes('c414')&& clicados.includes('c514') && clicados.includes('c614') && clicados.includes('c714')){
-        puntos=puntos+5;
+    if (clicados.includes('c114') && clicados.includes('c214') && clicados.includes('c314') && clicados.includes('c414') && clicados.includes('c514') && clicados.includes('c614') && clicados.includes('c714')) {
+        puntos = puntos + 5;
         document.getElementById("puntosObtenidosSopa").value = puntos;
         counter++;
     }
 
-    if(clicados.includes('c41') && clicados.includes('c42') && clicados.includes('c43') && clicados.includes('c44')&& clicados.includes('c45') && clicados.includes('c46') && clicados.includes('c47')){
-        puntos=puntos+5;
+    if (clicados.includes('c41') && clicados.includes('c42') && clicados.includes('c43') && clicados.includes('c44') && clicados.includes('c45') && clicados.includes('c46') && clicados.includes('c47')) {
+        puntos = puntos + 5;
         document.getElementById("puntosObtenidosSopa").value = puntos;
         counter++;
     }
 
-    if(clicados.includes('c85') && clicados.includes('c86') && clicados.includes('c87') && clicados.includes('c88')&& clicados.includes('c89') && clicados.includes('c810')){
-        puntos=puntos+5;
+    if (clicados.includes('c85') && clicados.includes('c86') && clicados.includes('c87') && clicados.includes('c88') && clicados.includes('c89') && clicados.includes('c810')) {
+        puntos = puntos + 5;
         document.getElementById("puntosObtenidosSopa").value = puntos;
         counter++;
     }
 
-    if(clicados.includes('c112') && clicados.includes('c211') && clicados.includes('c310') && clicados.includes('c49')&& clicados.includes('c58') && clicados.includes('c67') && clicados.includes('c76') && clicados.includes('c85') && clicados.includes('c94') && clicados.includes('c103')){
-        puntos=puntos+5;
+    if (clicados.includes('c112') && clicados.includes('c211') && clicados.includes('c310') && clicados.includes('c49') && clicados.includes('c58') && clicados.includes('c67') && clicados.includes('c76') && clicados.includes('c85') && clicados.includes('c94') && clicados.includes('c103')) {
+        puntos = puntos + 5;
         document.getElementById("puntosObtenidosSopa").value = puntos;
         counter++;
     }
 
-    if(clicados.includes('c112') && clicados.includes('c212') && clicados.includes('c312') && clicados.includes('c412')&& clicados.includes('c512') && clicados.includes('c612') && clicados.includes('c712') && clicados.includes('c812') && clicados.includes('c912')){
-        puntos=puntos+5;
+    if (clicados.includes('c112') && clicados.includes('c212') && clicados.includes('c312') && clicados.includes('c412') && clicados.includes('c512') && clicados.includes('c612') && clicados.includes('c712') && clicados.includes('c812') && clicados.includes('c912')) {
+        puntos = puntos + 5;
         document.getElementById("puntosObtenidosSopa").value = puntos;
         counter++;
     }
 
-    if(clicados.includes('c111') && clicados.includes('c210') && clicados.includes('c39') && clicados.includes('c48')&& clicados.includes('c57') && clicados.includes('c66') && clicados.includes('c75')){
-        puntos=puntos+5;
+    if (clicados.includes('c111') && clicados.includes('c210') && clicados.includes('c39') && clicados.includes('c48') && clicados.includes('c57') && clicados.includes('c66') && clicados.includes('c75')) {
+        puntos = puntos + 5;
         document.getElementById("puntosObtenidosSopa").value = puntos;
         counter++;
     }
 
-    if(clicados.includes('c51') && clicados.includes('c62') && clicados.includes('c73') && clicados.includes('c84')&& clicados.includes('c95') && clicados.includes('c106')){
-        puntos=puntos+5;
+    if (clicados.includes('c51') && clicados.includes('c62') && clicados.includes('c73') && clicados.includes('c84') && clicados.includes('c95') && clicados.includes('c106')) {
+        puntos = puntos + 5;
         document.getElementById("puntosObtenidosSopa").value = puntos;
         counter++;
     }
 
-    if(clicados.includes('c32') && clicados.includes('c33') && clicados.includes('c34') && clicados.includes('c35')&& clicados.includes('c36') && clicados.includes('c37') && clicados.includes('c38') && clicados.includes('c39') && clicados.includes('c310')){
-        puntos=puntos+5;
+    if (clicados.includes('c32') && clicados.includes('c33') && clicados.includes('c34') && clicados.includes('c35') && clicados.includes('c36') && clicados.includes('c37') && clicados.includes('c38') && clicados.includes('c39') && clicados.includes('c310')) {
+        puntos = puntos + 5;
         document.getElementById("puntosObtenidosSopa").value = puntos;
         counter++;
     }
 
-    if(clicados.includes('c18') && clicados.includes('c27') && clicados.includes('c36') && clicados.includes('c45')&& clicados.includes('c54') && clicados.includes('c63') && clicados.includes('c72') && clicados.includes('c81')){
-        puntos=puntos+5;
+    if (clicados.includes('c18') && clicados.includes('c27') && clicados.includes('c36') && clicados.includes('c45') && clicados.includes('c54') && clicados.includes('c63') && clicados.includes('c72') && clicados.includes('c81')) {
+        puntos = puntos + 5;
         document.getElementById("puntosObtenidosSopa").value = puntos;
         counter++;
     }
 
-    if(counter==9){
+    if (counter == 9) {
         alert("¡ENHORABUENA, HAS RESUELTO LA SOPA DE LETRAS COMPLETA!");
     }
 
@@ -324,9 +335,9 @@ function cambioColor(id){
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ "email": document.cookie, "puntos":puntos})
+        body: JSON.stringify({ "email": document.cookie, "puntos": puntos })
     }).then(response => {
-        if(response.status == 400){
+        if (response.status == 400) {
             alert("La suma de los puntos ha sido errónea.")
         }
     })

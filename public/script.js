@@ -4,12 +4,11 @@ let apellidoGlobal;
 let contrasenyaGlobal;
 let puntosGlobal;
 let esAdminGlobal;
-let cookieCreada;
 
 function comprobarLogueo() {
     if (document.cookie == "") {
         window.location.replace("./index.html");
-        alert("No dispone de acceso a dicha sección. Será redirigido a la página principal.")
+        alert("No dispone de acceso a dicha sección. Será redirigido a la página principal.");
     }
 }
 
@@ -42,14 +41,14 @@ async function datos(email) {
         },
         body: JSON.stringify({ "email": email })
     })
-    const aux = await response.json();
-    console.log(aux);
+ /*  const aux = await response.json();
+       console.log(aux);
     nombreGlobal = aux.NOMBRE;
     apellidoGlobal = aux.APELLIDOS;
     emailGlobal = aux.EMAIL;
     esAdminGlobal = aux.ESADMIN;
     contrasenyaGlobal = aux.CONTRASENYA;
-    puntosGlobal = aux.PUNTOS;
+    puntosGlobal = aux.PUNTOS;*/
 }
 
 function abrirFormularioAcceso() {

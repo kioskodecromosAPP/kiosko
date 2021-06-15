@@ -41,14 +41,14 @@ async function datos(email) {
         },
         body: JSON.stringify({ "email": email })
     })
- /*  const aux = await response.json();
-       console.log(aux);
+    const aux = await response.json();
+    console.log(aux);
     nombreGlobal = aux.NOMBRE;
     apellidoGlobal = aux.APELLIDOS;
     emailGlobal = aux.EMAIL;
     esAdminGlobal = aux.ESADMIN;
     contrasenyaGlobal = aux.CONTRASENYA;
-    puntosGlobal = aux.PUNTOS;*/
+    puntosGlobal = aux.PUNTOS;
 }
 
 function abrirFormularioAcceso() {
@@ -85,9 +85,8 @@ function registro() {
         if (response.status == 400) {
             alert("El registro ha sido incorrecto");
         } else if (response.status == 200) {
+            crearCookie(email);
             alert("El registro es correcto");
-            localStorage.setItem("email", email);
-            crearCookie();
             window.location.replace("./paginaInicio.html");
         } else {
             alert("Ya hay un usuario registrado con ese email");
@@ -125,21 +124,22 @@ function login() {
         if (response.status == 400) {
             alert("El login ha sido incorrecto");
         } else {
+            crearCookie(email);
             alert("El login es correcto");
-            localStorage.setItem("email", email);
-            crearCookie();
             window.location.replace("./paginaInicio.html");
         }
     })
 }
 
-function crearCookie() {
-    document.cookie = "emailUsuario=" + email + "; max-age=1";
+function crearCookie(email) {
+    document.cookie = email + "; max-age=60";
+    console.log(email);
+    console.log(document.cookie);
     cookieCreada = true;
 }
 
 async function rellenarDatosPerfil() {
-    await datos(localStorage.getItem("email"));
+    await datos(document.cookie);
     document.getElementById("nombrePerfil").value = getNombre();
     document.getElementById("apellidosPerfil").value = getApellidos();
     document.getElementById("emPerfil").value = getEmail();
@@ -150,37 +150,37 @@ function cerrarSesion() {
 
 }
 
-function resolverPreguntas(){
-    var respuestas=[];
+function resolverPreguntas() {
+    var respuestas = [];
 
-    document.getElementById("pregunta1").value=respuestas[0];
-    document.getElementById("pregunta2").value=respuestas[1];
-    document.getElementById("pregunta3").value=respuestas[2];
-    document.getElementById("pregunta4").value=respuestas[3];
-    document.getElementById("pregunta5").value=respuestas[4];
-    document.getElementById("pregunta6").value=respuestas[5];
-    document.getElementById("pregunta7").value=respuestas[6];
-    document.getElementById("pregunta8").value=respuestas[7];
-    document.getElementById("pregunta9").value=respuestas[8];
-    document.getElementById("pregunta10").value=respuestas[9];
+    document.getElementById("pregunta1").value = respuestas[0];
+    document.getElementById("pregunta2").value = respuestas[1];
+    document.getElementById("pregunta3").value = respuestas[2];
+    document.getElementById("pregunta4").value = respuestas[3];
+    document.getElementById("pregunta5").value = respuestas[4];
+    document.getElementById("pregunta6").value = respuestas[5];
+    document.getElementById("pregunta7").value = respuestas[6];
+    document.getElementById("pregunta8").value = respuestas[7];
+    document.getElementById("pregunta9").value = respuestas[8];
+    document.getElementById("pregunta10").value = respuestas[9];
 
     return respuestas;
 }
 
-function comprobarSol(){
-    let respuestas=resolverPreguntas();
+function comprobarSol() {
+    let respuestas = resolverPreguntas();
 
-    fetch ('/pasatiempo', {
-        method:'POST',
-        headers:{
-            'Content-Type' : 'application/json'
+    fetch('/pasatiempo', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
         },
 
-        body: JSON.stringify({ "respuestas": respuestas})  
+        body: JSON.stringify({ "respuestas": respuestas })
     }).then(response => {
-        if(response.status!= 200){
+        if (response.status != 200) {
             alert("El pasatiempo es incorrecto.")
-        }else{
+        } else {
             alert("¡ENHORABUENA! Has resuelto el crucigrama.")
 
         }

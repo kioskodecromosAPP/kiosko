@@ -7,7 +7,7 @@ let esAdminGlobal;
 var clicados = "";
 
 function comprobarLogueo() {
-    if (document.cookie == "") {
+    if (document.cookie.split("_")[0] == "") {
         window.location.replace("./index.html");
         alert("No dispone de acceso a dicha sección. Será redirigido a la página principal.");
     }
@@ -45,6 +45,10 @@ function getContrasenya() {
 
 function getPuntos() {
     return puntosGlobal;
+}
+
+function getEsAdmin(){
+    return esAdminGlobal;
 }
 
 async function datos(email) {
@@ -116,7 +120,7 @@ function registro() {
 
 function comprobarCookie() {
 
-    if (document.cookie == "") {
+    if (document.cookie.split("_")[0] == "") {
         abrirFormularioAcceso();
     } else {
         window.location.replace("./perfil.html");
@@ -234,7 +238,7 @@ function crearColeccion() {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ "nombreColeccion": nombreColeccion, "id": id, "email": document.cookie })
+        body: JSON.stringify({ "nombreColeccion": nombreColeccion, "id": id, "email": document.cookie.split("_")[0] })
     }).then(response => {
         console.log(response.status);
         if (response.status == 400) {
@@ -339,3 +343,40 @@ function cambioColor(id) {
     })
 
 }
+
+function cambiarEstado(){
+    const nombreCol= document.getElementById("nombreCol").value;
+    const estado = document.getElementById("estadoCol").value;
+    
+    console.log(nombreCol);
+    console.log(estado);
+    
+    fetch('/actividadesAdmin', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ "nombreCol": nombreCol, "estado": estado })
+    }).then(response => {
+        console.log(response.status);
+        if (response.status == 400) {
+            alert("No se ha podido cambiar el estado de la colección");
+        } else if (response.status == 200) {
+            alert("Se ha podido cambiar el estado de la colección");
+            window.location.replace("./paginaInicio.html");
+        } else {
+            alert("No hay ninguna colección con ese nombre");
+        }
+    });
+    }
+    
+    async function usuarioAdmin(){
+        await datos(document.cookie.split("_"));
+        console.log(document.cookie);
+        var esAdmin=getEsAdmin();
+        console.log(getEsAdmin());
+    
+        if(esAdmin==0){
+            document.getElementById("botonActividadesAdmin").style.display='none';
+        }
+    }

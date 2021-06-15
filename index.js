@@ -316,6 +316,40 @@ app.post('/getCartasUsuario', function (req, res) {
     })
 })
 
+app.post('/actividadesAdmin', function(req, res) {
+    console.log(req.body);
+
+    let aux = comprobarExisteColeccion(req.body.nombreCol);
+    if (aux == false) {
+        res.status(300).send();
+    } else {
+        var query = connection.query("UPDATE colecciones SET ESTADO = (?) WHERE NOMBRE = ?", [req.body.estado, req.body.nombreCol], async(err, result) => {
+            if (err) {
+                res.status(400).send();
+                throw err;
+            }
+            res.status(200).send();
+        })
+    }
+
+});
+
+async function comprobarIdUnico(nombreCol) {
+    var unico = false;
+
+    await connection.query("SELECT COUNT (*) as total FROM COLECCIONES WHERE NOMBRE=?", [nombreCol], (err, result) => {
+        if (err) throw err;
+        console.log(result);
+        console.log(result[0].total);
+        if (result[0].total != 0) {
+            unico = true;
+        }
+    })
+
+    return unico;
+}
+
+
 connection.end;
 app.listen(3000, () => {
     console.log("Server on port 3000");

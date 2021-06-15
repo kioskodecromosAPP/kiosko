@@ -1,0 +1,24 @@
+
+body,
+html {
+    width: fit-content;
+    height: fit-content;
+    background-color: #646E78;
+}
+
+.principal {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-gap: 100px;
+    margin-left: 65%;
+    justify-content: space-evenly;
+
+
+
+}
+
+.principal > div {
+    width: fit-content;
+    height: fit-content;
+}

@@ -5,20 +5,23 @@ const fetch = require('node-fetch');
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-const mysql = require('mysql');
-
-const cookieCreada = false;
-/*const pokemon = require('pokemontcgsdk');
+const pokemon = require('pokemontcgsdk');
 pokemon.configure({apiKey: 'b00e4133-8d52-447c-96fa-0ef1007f84e3'});
-pokemon.set.find('sm1')
+const mysql = require('mysql');
+let cookieCreada = false;
+
+/*pokemon.set.find('sm1')
     .then(card => {
-        console.log(card.name)
+        console.log(card)
     });
-pokemon.card.all({q: 'type:Grass'})
+pokemon.card.find('sm1-79')
+    .then(card => {
+        console.log(card)
+    });
+pokemon.card.where({q: 'set.id:sm1'})
     .then((cards) => {
-        console.log(cards.data[0].name) // "Blastoise"
-    })
-*/
+        console.log(cards.count);
+    })*/
 const connection = mysql.createConnection({
     host: '127.0.0.1',
     user: 'root',
@@ -34,14 +37,51 @@ try {
     console.log("Error al abrir la BD");
 }
 
-function comprobarAutentificacion(email, password) {
-    console.log("Login")
-   // let devuelve = false;
-    //let check;
+app.post('/getcarta', function (req, res) {
+    pokemon.card.find(req.body.id)
+        .then(card => {
+            console.log(card);
+            res.send(card);
+        });
+})
 
-}
 
-function cookie(){
+app.get('/getCartasMostrar', function (req, res) {
+
+    connection.query("SELECT * FROM ALBUMES", async function (err, result) {
+        try {
+            if (err) throw err;
+            if (result.length > 0) {
+               // let numTotalCAlbum;
+                let numRam = Math.floor(Math.random() * (result.length - 0));
+                //console.log('set.id:' + result[numRam].ID)
+                let response = await pokemon.card.where({q: 'set.id:' + result[numRam].ID});
+                let numTotal = await response.count;
+                let listaCartas = []
+                let listaId = []
+                //console.log(numTotal+"NUMTOTAL");
+                for (let i = 0; i < 6; i++) {
+                    let id = result[numRam].ID + "-" + Math.floor(Math.random() * (numTotal - 1) + 1).toString();
+                    if (listaId.indexOf(id) === -1) {
+                        let card = await pokemon.card.find(id);
+                        listaCartas.push(card)
+                        listaId.push(id);
+                    }
+                }
+                res.status(200).json(JSON.stringify(listaCartas));
+
+            } else {
+                console.log("ERROReeee")
+                res.status(42);
+            }
+        } catch (e) {
+            console.log(e)
+        }
+    });
+
+})
+
+function cookie() {
     cookieCreada = true;
 }
 
@@ -62,7 +102,7 @@ async function comprobarIdUnico(email) {
 
 
 app.post('/login', function (req, res) {
-    connection.query("SELECT * FROM usuarios WHERE EMAIL= ? and CONTRASENYA = ?", [req.body.email,req.body.password], function (err, result, fields) {
+    connection.query("SELECT * FROM USUARIOS WHERE EMAIL= ? and CONTRASENYA = ?", [req.body.email, req.body.password], function (err, result, fields) {
         try {
             if (err) throw err;
             if (result.length != 0) {
@@ -71,11 +111,11 @@ app.post('/login', function (req, res) {
             } else {
                 res.status(400).send();
             }
-        }catch (e){
+        } catch (e) {
             console.log("ERROR")
         }
     });
-    
+
 });
 
 

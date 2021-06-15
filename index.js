@@ -10,9 +10,9 @@ pokemon.configure({ apiKey: 'b00e4133-8d52-447c-96fa-0ef1007f84e3' });
 const mysql = require('mysql');
 let cookieCreada = false;
 
-const fs =require('fs');
-const data=fs.readFileSync('soluciones.json','utf-8');
-let solucion= JSON.parse(data);
+const fs = require('fs');
+const data = fs.readFileSync('soluciones.json', 'utf-8');
+let solucion = JSON.parse(data);
 
 /*pokemon.set.find('sm1')
     .then(card => {
@@ -35,14 +35,14 @@ const connection = mysql.createConnection({
 });
 
 try {
-    connection.connect(function(err) {
+    connection.connect(function (err) {
         if (err) throw err;
     });
 } catch (err) {
     console.log("Error al abrir la BD");
 }
 
-app.post('/getcarta', function(req, res) {
+app.post('/getcarta', function (req, res) {
     pokemon.card.find(req.body.id)
         .then(card => {
             console.log(card);
@@ -51,9 +51,34 @@ app.post('/getcarta', function(req, res) {
 })
 
 
-app.get('/getCartasMostrar', function(req, res) {
+app.get('/getCartasMostrar', function (req, res) {
 
-    connection.query("SELECT * FROM ALBUMES", async function(err, result) {
+    connection.query("SELECT * FROM CROMOS", function (err, result) {
+        try {
+            if (err) throw err;
+            if (result.length > 0) {
+                let listaCartas = []
+                for (let i = 0; i < result.length; i++) {
+                    let string = JSON.stringify(result[i])
+                    listaCartas.push(JSON.parse(string))
+
+                }
+                res.status(200).json(JSON.stringify(listaCartas));
+
+            } else {
+                console.log("ERROReeee")
+                res.status(42);
+            }
+        } catch (e) {
+            console.log(e)
+        }
+    });
+
+})
+
+
+app.get('/getNewCard', function (req, res) {
+    connection.query("SELECT * FROM ALBUMES", async function (err, result) {
         try {
             if (err) throw err;
             if (result.length > 0) {
@@ -64,7 +89,7 @@ app.get('/getCartasMostrar', function(req, res) {
                 let numTotal = await response.count;
                 let listaCartas = []
                 let listaId = []
-                    //console.log(numTotal+"NUMTOTAL");
+                //console.log(numTotal+"NUMTOTAL");
                 for (let i = 0; i < 6; i++) {
                     let id = result[numRam].ID + "-" + Math.floor(Math.random() * (numTotal - 1) + 1).toString();
                     if (listaId.indexOf(id) === -1) {
@@ -83,7 +108,6 @@ app.get('/getCartasMostrar', function(req, res) {
             console.log(e)
         }
     });
-
 })
 
 function cookie() {
@@ -106,8 +130,8 @@ async function comprobarIdUnico(email) {
 }
 
 
-app.post('/login', function(req, res) {
-    connection.query("SELECT * FROM USUARIOS WHERE EMAIL= ? and CONTRASENYA = ?", [req.body.email, req.body.password], function(err, result, fields) {
+app.post('/login', function (req, res) {
+    connection.query("SELECT * FROM USUARIOS WHERE EMAIL= ? and CONTRASENYA = ?", [req.body.email, req.body.password], function (err, result, fields) {
         try {
             if (err) throw err;
             if (result.length != 0) {
@@ -124,9 +148,9 @@ app.post('/login', function(req, res) {
 });
 
 
-app.post('/colecciones', function(req, res) {
+app.post('/colecciones', function (req, res) {
 
-    connection.query("SELECT * FROM COLECCIONES WHERE USUARIOEMAIL=?", [req.body.email], async(err, result) => {
+    connection.query("SELECT * FROM COLECCIONES WHERE USUARIOEMAIL=?", [req.body.email], async (err, result) => {
         var string = JSON.stringify(result);
         var json = JSON.parse(string);
         res.send(json[0]);
@@ -136,7 +160,7 @@ app.post('/colecciones', function(req, res) {
 });
 
 
-app.post('/registro', function(req, res) {
+app.post('/registro', function (req, res) {
     console.log(req.body);
     //COMPROBAMOS QUE NO EXISTE UN EMAIL IGUAL
     let aux = comprobarIdUnico(req.body.email);
@@ -146,7 +170,7 @@ app.post('/registro', function(req, res) {
     } else {
         //GUARDAMOS AL USUARIO EN LA BASE DE DATOS
 
-        var query = connection.query('INSERT INTO USUARIOS(NOMBRE,APELLIDOS,EMAIL,ESADMIN,CONTRASENYA,PUNTOS) VALUES(?, ?, ?, ?, ?,?)', [req.body.name, req.body.apellidos, req.body.email, '0', req.body.contrasenya, '0'], async(err, result) => {
+        var query = connection.query('INSERT INTO USUARIOS(NOMBRE,APELLIDOS,EMAIL,ESADMIN,CONTRASENYA,PUNTOS) VALUES(?, ?, ?, ?, ?,?)', [req.body.name, req.body.apellidos, req.body.email, '0', req.body.contrasenya, '0'], async (err, result) => {
             if (err) {
                 res.status(400).send();
                 throw err;
@@ -158,9 +182,9 @@ app.post('/registro', function(req, res) {
 
 });
 
-app.post('/datos', function(req, res) {
+app.post('/datos', function (req, res) {
 
-    connection.query("SELECT * FROM USUARIOS WHERE EMAIL=?", [req.body.email], async(err, result) => {
+    connection.query("SELECT * FROM USUARIOS WHERE EMAIL=?", [req.body.email], async (err, result) => {
         var string = JSON.stringify(result);
         var json = JSON.parse(string);
         //console.log(json[0]);
@@ -170,24 +194,24 @@ app.post('/datos', function(req, res) {
 
 });
 
-function palabraCorrecta(respuesta){
-    var counter=0;
+function palabraCorrecta(respuesta) {
+    var counter = 0;
 
-    for(var i=0;i<respuesta.length;i++){
-        var r=respuesta[i];
+    for (var i = 0; i < respuesta.length; i++) {
+        var r = respuesta[i];
 
-        if(solucion[0][i]==r){
+        if (solucion[0][i] == r) {
             counter++;
         }
     }
     return counter;
 }
 
-app.post('/preguntas', function(req,res) {
-        console.log(req.body);
-        const correcta = palabraCorrecta(req.body.respuestas);
-        console.log(correcta);
-        res.send(JSON.stringify(correcta))
+app.post('/preguntas', function (req, res) {
+    console.log(req.body);
+    const correcta = palabraCorrecta(req.body.respuestas);
+    console.log(correcta);
+    res.send(JSON.stringify(correcta))
 });
 
 connection.end;

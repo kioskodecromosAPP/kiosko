@@ -30,7 +30,7 @@ async function editarHTML () {
         document.getElementById("principal").appendChild(htmlElement);
 
         htmlElement = document.createElement('img');
-        htmlElement.src = cartas[i].images.small;
+        htmlElement.src = cartas[i].IMAGEN;
         htmlElement.className = 'image';
         document.getElementById("cromo"+i).appendChild(htmlElement);
     }

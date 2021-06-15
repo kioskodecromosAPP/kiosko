@@ -177,23 +177,23 @@ function cerrarSesion() {
 function resolverPreguntas() {
     var respuestas = [];
 
-    respuestas[0]=document.getElementById("pregunta1").value.toLowerCase();
-    respuestas[1]=document.getElementById("pregunta2").value.toLowerCase();
-    respuestas[2]=document.getElementById("pregunta3").value.toLowerCase();
-    respuestas[3]=document.getElementById("pregunta4").value.toLowerCase();
-    respuestas[4]=document.getElementById("pregunta5").value.toLowerCase();
-    respuestas[5]=document.getElementById("pregunta6").value.toLowerCase();
-    respuestas[6]=document.getElementById("pregunta7").value.toLowerCase();
-    respuestas[7]=document.getElementById("pregunta8").value.toLowerCase();
-    respuestas[8]=document.getElementById("pregunta9").value.toLowerCase();
-    respuestas[9]=document.getElementById("pregunta10").value.toLowerCase();
+    respuestas[0] = document.getElementById("pregunta1").value.toLowerCase();
+    respuestas[1] = document.getElementById("pregunta2").value.toLowerCase();
+    respuestas[2] = document.getElementById("pregunta3").value.toLowerCase();
+    respuestas[3] = document.getElementById("pregunta4").value.toLowerCase();
+    respuestas[4] = document.getElementById("pregunta5").value.toLowerCase();
+    respuestas[5] = document.getElementById("pregunta6").value.toLowerCase();
+    respuestas[6] = document.getElementById("pregunta7").value.toLowerCase();
+    respuestas[7] = document.getElementById("pregunta8").value.toLowerCase();
+    respuestas[8] = document.getElementById("pregunta9").value.toLowerCase();
+    respuestas[9] = document.getElementById("pregunta10").value.toLowerCase();
 
-    var aux=comprobarSol(respuestas);
-    let puntos=0;
-    aux.then(respuestas =>{
+    var aux = comprobarSol(respuestas);
+    let puntos = 0;
+    aux.then(respuestas => {
         alert("Has acertado " + respuestas + " preguntas");
-        puntos=respuestas*5;
-        document.getElementById("puntosObtenidos").value=puntos;
+        puntos = respuestas * 5;
+        document.getElementById("puntosObtenidos").value = puntos;
     })
 }
 
@@ -204,9 +204,9 @@ function comprobarSol(respuestas) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({"respuestas": respuestas})
+        body: JSON.stringify({ "respuestas": respuestas })
 
-    }).then(response => response.json().then(async function (text) {
+    }).then(response => response.json().then(async function(text) {
         return JSON.parse(text);
     }));
 }

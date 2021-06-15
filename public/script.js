@@ -147,7 +147,9 @@ async function rellenarDatosPerfil() {
 }
 
 function cerrarSesion() {
-
+    var aux = document.cookie;
+    document.cookie = aux + "; max-age=0";
+    window.location.replace("./index.html");
 }
 
 function resolverPreguntas() {

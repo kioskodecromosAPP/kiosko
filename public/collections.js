@@ -146,10 +146,31 @@ async function editarHTML() {
 
 }
 
-function getColecciones(id) {
-    return fetch("/getCol", {
-        method: "GET",
-    }).then(response => response.json().then(function(json) {
-        return json;
-    }));
+async function pepe(){
+    var id = document.cookie.split("_");
+    const response = await fetch('/getCartasUsuario',{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ "id": id[1] })
+    });
+
+    const cartas = await response.json();
+
+    for (let i = 0; i < cartas.length; i++) {
+        let htmlElement = document.createElement('div');
+        htmlElement.id = 'cromo' + i;
+        htmlElement.className = 'cromo';
+        document.getElementById("principal").appendChild(htmlElement);
+
+        htmlElement = document.createElement('img');
+        htmlElement.src = cartas[i].IMAGEN;
+        htmlElement.className = 'image';
+
+
+        document.getElementById("cromo" + i).appendChild(htmlElement);
+    
+    }
+
 }

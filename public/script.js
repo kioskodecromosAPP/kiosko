@@ -147,19 +147,20 @@ function login() {
 
 function crearCookie(email) {
     document.cookie = email + "; max-age=1800";
+    document.cookie += "_";
     console.log(email);
     console.log(document.cookie);
     cookieCreada = true;
 }
 
 async function rellenarDatosPerfil() {
-    await datos(document.cookie);
+    await datos(document.cookie.split("_")[0]);
     document.getElementById("nombrePerfil").value = getNombre();
     document.getElementById("apellidosPerfil").value = getApellidos();
     document.getElementById("emPerfil").value = getEmail();
     document.getElementById("puntosPerfil").value = getPuntos();
 
-    const promise = getColecciones(document.cookie);
+    const promise = getColecciones(document.cookie.split("_")[0]);
     promise.then(colecciones => {
         console.log(colecciones)
         for (let i = 0; i < colecciones.length; i++) {
@@ -168,15 +169,10 @@ async function rellenarDatosPerfil() {
             button.className = 'colec' + i;
             console.log(colecciones[i].IDCOLUSER)
             button.innerHTML = colecciones[i].NOMBRE;
-            button.onclick = button.onclick = async function () {
-                await fetch('/getCol', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ "id": colecciones[i].IDCOLUSER })
-                });
-
+            button.onclick = button.onclick =  function () {
+                document.cookie = getEmail();
+                document.cookie += "_";
+                document.cookie += colecciones[i].IDCOLUSER;
                 window.location.replace("/colecciones.html")
             };
             document.getElementById("colecciones").appendChild(button);

@@ -1,42 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <link rel="STYLESHEET" type="text/css" href="estilos.css">
-    <script src="./script.js"></script>
+    <meta charset="UTF-8">
+    <link rel="STYLESHEET" type="text/css" href="colecciones.css">
+    <script src="collections.js"></script>
 </head>
 
-<body class="bodyColecciones">
-
-    <title>Página principal</title>
-
-    <table align="left" width="20%">
-        <tr style="height: 50px;">
-            <td>
-                <img src="logo.PNG" style="width: 200px; height: 200px;">
-            </td>
-        </tr>
-        <tr style="height: 50px; ">
-            <td>
-                <a href="perfil.html"><button type="button" id="botonPerfil">Perfil</button></a>
-            </td>
-        </tr>
-
-        <tr style="height: 50px; ">
-            <td>
-                <a href="tienda.html"><button type="button " id="botonColeciones ">Tienda</button></a>
-            </td>
-        </tr>
-        <tr style="height: 50px; ">
-            <td>
-                <a href="actividades.html"><button type="button " id="botonActividades ">Actividades</button></a>
-            </td>
-        </tr>
-
-    </table>
-
-    <div id="albumes" class="albumes"></div>
-
+<body onload="pepe()">
+    <title>Cartas de la coleccion</title>
+    <h1>- CARTAS DE LA COLECCION -</h1>
+    <div style="text-align: right; padding-bottom: 10px;">
+        <a href="paginaInicio.html"><button type="button " class="botonEspecial" id="paginaInicio" style="text-align:center;">Volver al
+            inicio</button></a>
+    </div>
+    <div class="principal" id="principal" style="margin-top: 12px;"></div>
 </body>
 
 </html>

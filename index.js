@@ -42,13 +42,10 @@ try {
     console.log("Error al abrir la BD");
 }
 
-app.post('/getcarta', function(req, res) {
-    pokemon.card.find(req.body.id)
-        .then(card => {
-            console.log(card);
-            res.send(card);
-        });
-});
+app.post('/getCarta',  async function (req, res) {
+    let card = await pokemon.card.find(req.body.idCarta);
+    res.status(200).json(card);
+})
 
 app.post('/comprarCarta', function(req, res) {
     //PRIMERO HAY QUE QUITAR UNA UNIDAD A LA CARTA

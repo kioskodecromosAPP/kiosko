@@ -206,14 +206,14 @@ function crearColeccion(){
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ "nombreColeccion": nombreColeccion, "id": id})
+        body: JSON.stringify({ "nombreColeccion": nombreColeccion, "id": id, "email": document.cookie})
     }).then(response => {
         console.log(response.status);
         if (response.status == 400) {
             alert("El registro ha sido incorrecto");
         } else if (response.status == 200) {
             crearCookie(email);
-            alert("El registro es correcto");
+            alert("El registro de coleccion es correcto");
             window.location.replace("./perfil.html");
         } else {
             alert("El album con ese nombre no existe");

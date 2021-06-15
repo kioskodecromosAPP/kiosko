@@ -174,13 +174,22 @@ app.post('/colecciones', function (req, res) {
 
 });
 
-app.post('crearCol', function(req,res){
+app.post('/crearCol', function(req,res){
     let aux = comprobarAlbum(req.body.id);
 
     if(aux == false){
         req.status(300).send();
+    }else{
+        var query = connection.query('INSERT INTO COLECCIONES(NOMBRE,IDALBUM,USUARIOEMAIL,ESTADO,NUMCROMOS) VALUES(?, ?, ?, ?, ?)', [req.body.nombreColeccion, req.body.id, req.body.email, '0', '0'], async (err, result) => {
+            if (err) {
+                res.status(400).send();
+                throw err;
+            }
+            res.status(200).send();
+            //console.log(query);
+        })
     }
-})
+});
 
 app.post('/registro', function (req, res) {
     console.log(req.body);

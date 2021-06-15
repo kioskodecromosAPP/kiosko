@@ -6,8 +6,8 @@ let puntosGlobal;
 let esAdminGlobal;
 let cookieCreada;
 
-function comprobarLogueo(){
-    if(document.cookie == ""){
+function comprobarLogueo() {
+    if (document.cookie == "") {
         window.location.replace("./index.html");
         alert("No dispone de acceso a dicha sección. Será redirigido a la página principal.")
     }
@@ -31,28 +31,25 @@ function getContrasenya() {
 }
 
 function getPuntos() {
-    return puntos;
+    return puntosGlobal;
 }
 
-function datos(email) {
-    fetch('/datos', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ "email": email })
-        }).then(res => {
-            return res.json()
-        })
-        .then((response) => {
-            console.log(JSON.stringify(response));
-            nombreGlobal = JSON.stringify(response.NOMBRE);
-            apellidoGlobal = JSON.stringify(response.APELLIDOS);
-            emailGlobal = JSON.stringify(response.EMAIL);
-            esAdminGlobal = JSON.stringify(response.ESADMIN);
-            contrasenyaGlobal = JSON.stringify(response.CONTRASENYA);
-            puntosGlobal = JSON.stringify(response.PUNTOS);
-        })
+async function datos(email) {
+    const response = await fetch('/datos', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ "email": email })
+    })
+    const aux = await response.json();
+    console.log(aux);
+    nombreGlobal = aux.NOMBRE;
+    apellidoGlobal = aux.APELLIDOS;
+    emailGlobal = aux.EMAIL;
+    esAdminGlobal = aux.ESADMIN;
+    contrasenyaGlobal = aux.CONTRASENYA;
+    puntosGlobal = aux.PUNTOS;
 }
 
 function abrirFormularioAcceso() {
@@ -90,8 +87,8 @@ function registro() {
             alert("El registro ha sido incorrecto");
         } else if (response.status == 200) {
             alert("El registro es correcto");
-            emailGlobal = email;
-            datos(email);
+            localStorage.setItem("email", email);
+            crearCookie();
             window.location.replace("./paginaInicio.html");
         } else {
             alert("Ya hay un usuario registrado con ese email");
@@ -130,7 +127,7 @@ function login() {
             alert("El login ha sido incorrecto");
         } else {
             alert("El login es correcto");
-           // datos(email);
+            localStorage.setItem("email", email);
             crearCookie();
             window.location.replace("./paginaInicio.html");
         }
@@ -138,15 +135,18 @@ function login() {
 }
 
 function crearCookie() {
-    document.cookie = "emailUsuario=" + email + "; max-age=1800";
+    document.cookie = "emailUsuario=" + email + "; max-age=1";
     cookieCreada = true;
 }
 
-function rellenarDatosPerfil() {
+async function rellenarDatosPerfil() {
+    await datos(localStorage.getItem("email"));
     document.getElementById("nombrePerfil").value = getNombre();
-    console.log(getNombre());
     document.getElementById("apellidosPerfil").value = getApellidos();
     document.getElementById("emPerfil").value = getEmail();
-    document.getElementById("conPerfil").value = getContrasenya();
     document.getElementById("puntosPerfil").value = getPuntos();
+}
+
+function cerrarSesion() {
+
 }

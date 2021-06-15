@@ -2,7 +2,7 @@ button {
     text-decoration: none;
     padding: 10px;
     font-size: 20px;
-    border: 0px;
+    border: 1px solid black;
     text-align: center;
     width: 200px;
     height: 40px;

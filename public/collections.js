@@ -37,7 +37,53 @@ function comprobarPuntos(id, cartas) {
 
 //FUNCIÓN PARA COMPRAR UN CROMO
 function comprar(carta, email) {
+    //COMPROBAMOS SI EL USUARIO TIENE ALGUNA COLECCIÓN PARA GUARDAR EL CROMO A COMPRAR
+    let aux = buscarColecciones(email);
+    let puntosUs = datos(email);
+    if (aux != 0) {
+        //SI TIENE ALGUNA COLECCIÓN DISPONIBLE COMPROBAMOS SI TIENE PUNTOS SUFICIENTES
+        if (carta.PUNTOS <= puntosUs) {
+            //SI TIENE PUNTOS PODEMOS COMPRAR EL CROMO
+            //PRIMERO ELIGE LA COLECCION DONDE DEBE IR
+            elegirColeccion(email, carta.PUNTOS);
+        } else {
+            alert("No dispone de puntos necesarios para comprar este cromo");
+        }
+    } else {
+        alert("No dispone de colecciones. Debe crear una para poder comprar cromos");
+    }
+}
 
+//FUNCIÓN PARA SABER CUANTAS COLECCIONES TIENE CADA USUARIO
+async function buscarColecciones(email) {
+    const response = await fetch('/buscarColecciones', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ "email": email })
+    })
+    const aux = await response.json();
+    console.log(aux);
+    return aux;
+}
+
+//FUNCIÓN PARA ELEGIR LA COLECCIÓN DONDE GUARDAR EL CROMO
+function elegirColeccion(email, puntos) {
+    //CUESTIONARIO PARA PREGUNTAR POR LA COLECCION DONDE QUIERE GUARDAR EL CROMO
+    //SI SE HA ELEGIDO CORRECTAMENTE : COMPRAMOS
+    puntosUs(email, puntos);
+    //RESTAR STOCK DE CROMOS
+}
+
+async function puntosUs(email, puntos) {
+    const response = await fetch('/actualizarPuntos', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ "puntos": puntos, "email": email })
+    })
 }
 
 async function datos(email) {

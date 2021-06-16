@@ -14,18 +14,6 @@ const fs = require('fs');
 const data = fs.readFileSync('soluciones.json', 'utf-8');
 let solucion = JSON.parse(data);
 
-/*pokemon.set.find('sm1')
-    .then(card => {
-        console.log(card)
-    });
-pokemon.card.find('sm1-79')
-    .then(card => {
-        console.log(card)
-    });
-pokemon.card.where({q: 'set.id:sm1'})
-    .then((cards) => {
-        console.log(cards.count);
-    })*/
 
 const connection = mysql.createConnection({
     host: '127.0.0.1',
@@ -43,7 +31,7 @@ try {
 }
 
 app.post('/getCarta', async function(req, res) {
-    let card = await pokemon.card.find(req.body.idCarta);
+    let card = await pokemon.card.find(req.body.id);
     res.status(200).json(card);
 })
 
@@ -92,13 +80,6 @@ app.post('/buscarColecciones', function(req, res) {
         }
     })
 
-    /*
-        //DESPUES ASIGNAMOS EL ID DE LA CARTA AL USUARIO
-
-        connection.query("UPDATE colecciones SET NUMCROMOS = (NUMCROMOS + ' ' + ? ) WHERE USUARIOEMAIL = ?", [req.body.id, req.body.email], async(err, result) => {
-            if (err) throw err;
-        })
-    */
 })
 
 app.get('/getCartasMostrar', function(req, res) {

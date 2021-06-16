@@ -4,7 +4,7 @@ function cogerCarta(id) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ "idCarta": id })
+        body: JSON.stringify({ "id": id })
     }).then(response => response.json().then(function(json) {
         return json;
     }));
@@ -222,31 +222,32 @@ async function editarHTML() {
         htmlElement.className = 'cromo';
         document.getElementById("principal").appendChild(htmlElement);
 
-        htmlElement = document.createElement('img');
-        htmlElement.src = cartas[i].IMAGEN;
-        htmlElement.className = 'image';
+        let htmlElement0 = document.createElement('img');
+        htmlElement0.src = cartas[i].IMAGEN;
+        htmlElement0.className = 'image';
+        htmlElement0.id = 'image';
 
         let htmlElement2 = document.createElement('div');
-        htmlElement2.id = 'cromo' + i;
-        document.getElementById("principal").appendChild(htmlElement2);
+        htmlElement2.id = 'descrip' + i;
+      //  document.getElementById("principal").appendChild(htmlElement2);
 
         htmlElement2.textContent = "Número de copias disponibles: " + cartas[i].NUMCOPIAS;
 
         let htmlElement3 = document.createElement('div');
-        htmlElement3.id = 'cromo' + i;
-        document.getElementById("principal").appendChild(htmlElement3);
+        htmlElement3.id = 'descrip' + i;
+        //document.getElementById("principal").appendChild(htmlElement3);
 
-        htmlElement3.textContent = "Nombre del cromo: " + cartas[i].ID;
+        htmlElement3.textContent = "Nombre del cromo: " + (await cogerCarta(cartas[i].ID)).name;
 
         let htmlElement4 = document.createElement('div');
-        htmlElement4.id = 'cromo' + i;
-        document.getElementById("principal").appendChild(htmlElement4);
+        htmlElement4.id = 'descrip' + i;
+        //document.getElementById("principal").appendChild(htmlElement4);
 
         htmlElement4.textContent = "Albúm: " + cartas[i].IDALBUM;
 
         let htmlElement5 = document.createElement('div');
-        htmlElement5.id = 'cromo' + i;
-        document.getElementById("principal").appendChild(htmlElement5);
+        htmlElement5.id = 'descrip' + i;
+       // document.getElementById("principal").appendChild(htmlElement5);
 
         htmlElement5.textContent = "Precio: " + cartas[i].PRECIO + " puntos";
 
@@ -254,11 +255,9 @@ async function editarHTML() {
         boton.innerHTML = "Comprar";
 
         boton.onclick = function() {
-            var email = document.cookie.split("_")[0];
-            comprar(cartas[i], email);
+            comprobarPuntos(i, cartas);
         };
-
-        document.getElementById("cromo" + i).appendChild(htmlElement);
+        document.getElementById("cromo" + i).appendChild(htmlElement0);
         document.getElementById("cromo" + i).appendChild(htmlElement2);
         document.getElementById("cromo" + i).appendChild(htmlElement3);
         document.getElementById("cromo" + i).appendChild(htmlElement4);

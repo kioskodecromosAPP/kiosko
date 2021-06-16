@@ -7,88 +7,88 @@
 </head>
 
 <body onload="rellenarDatosPerfil();comprobarLogueo()">
-    <title>Perfil</title>
-    <h1>- PERFIL -</h1>
-    <div style="text-align: right;">
-        <a href="paginaInicio.html"><button type="button " id="paginaInicio" style="text-align:center;">Volver al
-                inicio</button></a>
-        <a href="index.html"><button type="button" id="cerrarSesion" onclick="cerrarSesion()"
-                style="text-align:center;">Cerrar sesión</button></a>
-    </div>
+<title>Perfil</title>
+<h1>- PERFIL -</h1>
+<div style="text-align: right;">
+    <a href="paginaInicio.html"><button type="button " id="paginaInicio" style="text-align:center;">Volver al
+        inicio</button></a>
+    <a href="index.html"><button type="button" id="cerrarSesion" onclick="cerrarSesion()"
+                                 style="text-align:center;">Cerrar sesión</button></a>
+</div>
 
-    <table width="100%" style="margin-top: 10px;">
-        <tr>
-            <td width="20%">
-                <div style="background-color: bisque; padding: 10px;height: 20px;width: 70px; text-align: center;">
-                    DATOS
-                </div>
-            </td>
+<table width="100%" style="margin-top: 10px;">
+    <tr>
+        <td width="20%">
+            <div style="background-color: bisque; padding: 10px;height: 20px;width: 70px; text-align: center;">
+                DATOS
+            </div>
+        </td>
 
-            <td width="60%" align="center">
-                <div style="background-color: bisque; padding: 10px;height: 20px;width: 200px; text-align: center;">
-                    COLECCIONES
-                </div>
-            </td>
+        <td width="60%" align="center">
+            <div style="background-color: bisque; padding: 10px;height: 20px;width: 200px; text-align: center;">
+                COLECCIONES
+            </div>
+        </td>
 
-            <td width="20%">
-                <div style="background-color: bisque; padding: 10px;height: 50px;width: 400px; text-align: center;">
-                    ¿Quieres ganar puntos extras para expandir tu colección de cromos? Participa en nuestras actividades
-                    para ver cuánto sabes de cromos:
-                </div>
+        <td width="20%">
+            <div style="background-color: bisque; padding: 10px;height: 50px;width: 400px; text-align: center;">
+                ¿Quieres ganar puntos extras para expandir tu colección de cromos? Participa en nuestras actividades
+                para ver cuánto sabes de cromos:
+            </div>
 
-                <div align="center" style="padding-top: 10px;">
-                    <a href="actividades.html "><button type="button " id="pagAct "
-                            style="text-align:center; ">Actividades</button></a>
-                </div>
-            </td>
+            <div align="center" style="padding-top: 10px;">
+                <a href="actividades.html "><button type="button " id="pagAct "
+                                                    style="text-align:center; ">Actividades</button></a>
+            </div>
+        </td>
 
-        <tr>
-            <td>
-                <div>
-                    <label for="nombre"><b>Nombre:</b></label> <br>
-                    <input type="text" id="perfil" size="30" readonly><br><br>
+    <tr>
+        <td>
+            <div>
+                <label for="nombre"><b>Nombre:</b></label> <br>
+                <input type="text" id="nombrePerfil" class="perfil" size="30" readonly><br><br>
 
-                    <label for="apellidos"><b>Apellidos:</b></label><br>
-                    <input type="text" id="perfil" size="30" readonly><br><br>
+                <label for="apellidos"><b>Apellidos:</b></label><br>
+                <input type="text" id="apellidosPerfil" class="perfil" size="30" readonly><br><br>
 
-                    <label for="em"><b>Email:</b></label><br>
-                    <input type="text" id="perfil" size="30" readonly><br><br>
+                <label for="em"><b>Email:</b></label><br>
+                <input type="text" id="emPerfil" class="perfil" size="30" readonly><br><br>
 
-                    <img id="destacada" src=fotoMoneda.png align="left">
-                    <label for="puntos"><b>Puntos:</b></label><br><br>
-                    <input type="text" id="perfil" size="5" readonly><br><br>
-                </div>
-            </td>
+                <img id="destacada" src=fotoMoneda.png align="left">
+                <label for="puntos"><b>Puntos:</b></label><br><br>
+                <input type="text" id="puntosPerfil" class="perfil" size="5" readonly><br><br>
+            </div>
+        </td>
 
-            <td>
-                <!--AQUÍ IRÁN LAS COLECCIONES DE CADA USUARIO-->
-                <div id="colecciones" align="center"></div>
-                <div align="center" style="padding-top: 10px;">
-                    <form>
-                        <label for="nombreColeccion"><b>Nombre de la Coleccion</b></label> <br>
-                        <input type="text" placeholder="Nombre Coleccion" id="nombreColeccion" required
-                            size="30"><br><br>
+        <td>
+            <!--AQUÍ IRÁN LAS COLECCIONES DE CADA USUARIO-->
+            <div id="colecciones" align="center"></div>
+            <div align="center" style="padding-top: 10px;">
+                <form>
+                    <label for="nombreColeccion"><b>Nombre de la Coleccion</b></label> <br>
+                    <input type="text" placeholder="Nombre Coleccion" id="nombreColeccion" required
+                           size="30"><br><br>
 
-                        <label for="nombreAlbum"><b>Id del Album</b></label><br>
-                        <input type="text" placeholder="Nombre Album" id="nombreAlbum" required size="30"><br><br>
+                    <label for="nombreAlbum"><b>Id del Album</b></label><br>
+                    <input type="text" placeholder="Nombre Album" id="nombreAlbum" required size="30"><br><br>
 
-                        <button type="submit" class="btn" onclick="crearColeccion()">Crear Coleccion</button> <br><br>
-                    </form>
-                </div>
-            </td>
+                    <button type="submit" class="btn" onclick="crearColeccion()">Crear Coleccion</button> <br><br>
+                </form>
+            </div>
+        </td>
 
-            <td>
-                <div style="background-color: bisque; padding: 10px;height: 50px;width: 400px; text-align: center;">
-                    ¿Quieres hacerte con más cromos y aumentar tu colección? Compra ahora en nuestra tienda:
-                </div>
+        <td>
+            <div style="background-color: bisque; padding: 10px;height: 50px;width: 400px; text-align: center;">
+                ¿Quieres hacerte con más cromos y aumentar tu colección? Compra ahora en nuestra tienda:
+            </div>
 
-                <div align="center" style="padding-top: 10px;">
-                    <a href="tienda.html"><button type="button " id="pagAct "
-                            style="text-align:center; ">Tienda</button></a>
-                </div>
-            </td>
-        </tr>
-    </table>
+            <div align="center" style="padding-top: 10px;">
+                <a href="tienda.html"><button type="button " id="pagAct "
+                                              style="text-align:center; ">Tienda</button></a>
+            </div>
+        </td>
+    </tr>
+</table>
 </body>
 
 </html>

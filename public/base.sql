@@ -1,3 +1,4 @@
+DROP DATABASE cromos;
 CREATE DATABASE cromos;
 USE cromos;
 

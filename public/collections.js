@@ -159,7 +159,11 @@ async function elegirColeccion(email, carta, puntosUser) {
                     anadirUser(carta);
                 }
             } else {
-                alert("VUELVA A ELEGIR OTRA VEZ.")
+                if (carta.IDALBUM != colecciones[i].IDALBUM) {
+                    alert("No tiene un album de la misma coleccion que el cromo");
+                } else {
+                    alert("Elija otro cromo");
+                }
             }
         }
     }
@@ -177,7 +181,7 @@ async function datos(email) {
         body: JSON.stringify({ "email": email })
     })
     const aux = await response.json();
-    console.log(aux+"PP")
+    console.log(aux);
     return aux.PUNTOS;
 }
 
@@ -231,35 +235,6 @@ async function editarHTML() {
         document.getElementById("cromo" + i).appendChild(htmlElement4);
         document.getElementById("cromo" + i).appendChild(htmlElement5);
         document.getElementById("cromo" + i).appendChild(boton);
-    }
-
-}
-
-async function pepe() {
-    var id = document.cookie.split("_");
-    const response = await fetch('/getCartasUsuario', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ "id": id[1] })
-    });
-
-    const cartas = await response.json();
-
-    for (let i = 0; i < cartas.length; i++) {
-        let htmlElement = document.createElement('div');
-        htmlElement.id = 'cromo' + i;
-        htmlElement.className = 'cromo';
-        document.getElementById("principal").appendChild(htmlElement);
-
-        htmlElement = document.createElement('img');
-        htmlElement.src = cartas[i].IMAGEN;
-        htmlElement.className = 'image';
-
-
-        document.getElementById("cromo" + i).appendChild(htmlElement);
-
     }
 
 }

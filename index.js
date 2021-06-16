@@ -269,7 +269,7 @@ app.post('/addAlbum', function(req, res) {
 });
 
 app.post('/actualizarPuntos', function(req, res) {
-    connection.query("UPDATE usuarios SET PUNTOS = (PUNTOS + ?) WHERE EMAIL = ?", [req.body.puntos, req.body.email], async(err, result) => {
+    connection.query("UPDATE usuarios SET PUNTOS = (PUNTOS + ?) WHERE EMAIL = ?", [req.body.puntos, req.body.email], function(err, result) {
         if (err) {
             res.status(400).send();
         }
@@ -282,7 +282,7 @@ app.post('/crearCol', function(req, res) {
     if (aux == false) {
         req.status(300).send();
     } else {
-        connection.query('INSERT INTO COLECCIONES(NOMBRE,IDALBUM,USUARIOEMAIL,ESTADO,NUMCROMOS) VALUES(?, ?, ?, ?, ?)', [req.body.nombreColeccion, req.body.id, req.body.email, '0', '0'], async(err, result) => {
+        connection.query('INSERT INTO COLECCIONES(NOMBRE,USUARIOEMAIL,ESTADO,IDALBUM) VALUES(?, ?, ?, ?)', [req.body.nombreColeccion, req.body.email, '1', req.body.id], async(err, result) => {
             if (err) {
                 res.status(400).send();
                 throw err;
@@ -303,7 +303,7 @@ app.post('/registro', function(req, res) {
     } else {
         //GUARDAMOS AL USUARIO EN LA BASE DE DATOS
 
-        var query = connection.query('INSERT INTO USUARIOS(NOMBRE,APELLIDOS,EMAIL,ESADMIN,CONTRASENYA,PUNTOS) VALUES(?, ?, ?, ?, ?,?)', [req.body.name, req.body.apellidos, req.body.email, '0', req.body.contrasenya, '0'], async(err, result) => {
+        var query = connection.query('INSERT INTO USUARIOS(NOMBRE,APELLIDOS,EMAIL,ESADMIN,CONTRASENYA,PUNTOS,IDTIENDA) VALUES(?, ?, ?, ?, ?,?,?)', [req.body.name, req.body.apellidos, req.body.email, '0', req.body.contrasenya, '0', 'tienda'], async(err, result) => {
             if (err) {
                 res.status(400).send();
                 throw err;
@@ -316,10 +316,11 @@ app.post('/registro', function(req, res) {
 });
 
 app.post('/datos', function(req, res) {
-    connection.query("SELECT * FROM USUARIOS WHERE EMAIL = ?", [req.body.email], function(err, result) {
-        let string = JSON.stringify(result);
-        let json = JSON.parse(string);
-        res.json(json);
+
+    connection.query("SELECT * FROM USUARIOS WHERE EMAIL=?", [req.body.email], function(err, result) {
+        var string = JSON.stringify(result);
+        var json = JSON.parse(string);
+        res.send(json[0]);
     })
 
 

@@ -52,7 +52,6 @@ function getEsAdmin() {
 }
 
 async function datos(email) {
-    console.log(email)
     const response = await fetch('/datos', {
         method: 'POST',
         headers: {
@@ -219,7 +218,7 @@ function resolverPreguntas() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ "email": document.cookie, "puntos": puntos })
+            body: JSON.stringify({ "email": document.cookie.split("_")[0], "puntos": puntos })
         }).then(response => {
             if (response.status == 400) {
                 alert("La suma de los puntos ha sido errónea.")
@@ -277,72 +276,83 @@ function cambioColor(id) {
         puntos = puntos + 5;
         document.getElementById("puntosObtenidosSopa").value = puntos;
         counter++;
+        actualizarPuntos(puntos);
     }
 
     if (clicados.includes('c41') && clicados.includes('c42') && clicados.includes('c43') && clicados.includes('c44') && clicados.includes('c45') && clicados.includes('c46') && clicados.includes('c47')) {
         puntos = puntos + 5;
         document.getElementById("puntosObtenidosSopa").value = puntos;
         counter++;
+        actualizarPuntos(puntos);
     }
 
     if (clicados.includes('c85') && clicados.includes('c86') && clicados.includes('c87') && clicados.includes('c88') && clicados.includes('c89') && clicados.includes('c810')) {
         puntos = puntos + 5;
         document.getElementById("puntosObtenidosSopa").value = puntos;
         counter++;
+        actualizarPuntos(puntos);
     }
 
     if (clicados.includes('c112') && clicados.includes('c211') && clicados.includes('c310') && clicados.includes('c49') && clicados.includes('c58') && clicados.includes('c67') && clicados.includes('c76') && clicados.includes('c85') && clicados.includes('c94') && clicados.includes('c103')) {
         puntos = puntos + 5;
         document.getElementById("puntosObtenidosSopa").value = puntos;
         counter++;
+        actualizarPuntos(puntos);
     }
 
     if (clicados.includes('c112') && clicados.includes('c212') && clicados.includes('c312') && clicados.includes('c412') && clicados.includes('c512') && clicados.includes('c612') && clicados.includes('c712') && clicados.includes('c812') && clicados.includes('c912')) {
         puntos = puntos + 5;
         document.getElementById("puntosObtenidosSopa").value = puntos;
         counter++;
+        actualizarPuntos(puntos);
     }
 
     if (clicados.includes('c111') && clicados.includes('c210') && clicados.includes('c39') && clicados.includes('c48') && clicados.includes('c57') && clicados.includes('c66') && clicados.includes('c75')) {
         puntos = puntos + 5;
         document.getElementById("puntosObtenidosSopa").value = puntos;
         counter++;
+        actualizarPuntos(puntos);
     }
 
     if (clicados.includes('c51') && clicados.includes('c62') && clicados.includes('c73') && clicados.includes('c84') && clicados.includes('c95') && clicados.includes('c106')) {
         puntos = puntos + 5;
         document.getElementById("puntosObtenidosSopa").value = puntos;
         counter++;
+        actualizarPuntos(puntos);
     }
 
     if (clicados.includes('c32') && clicados.includes('c33') && clicados.includes('c34') && clicados.includes('c35') && clicados.includes('c36') && clicados.includes('c37') && clicados.includes('c38') && clicados.includes('c39') && clicados.includes('c310')) {
         puntos = puntos + 5;
         document.getElementById("puntosObtenidosSopa").value = puntos;
         counter++;
+        actualizarPuntos(puntos);
     }
 
     if (clicados.includes('c18') && clicados.includes('c27') && clicados.includes('c36') && clicados.includes('c45') && clicados.includes('c54') && clicados.includes('c63') && clicados.includes('c72') && clicados.includes('c81')) {
         puntos = puntos + 5;
         document.getElementById("puntosObtenidosSopa").value = puntos;
         counter++;
+        actualizarPuntos(puntos);
     }
 
     if (counter == 9) {
         alert("¡ENHORABUENA, HAS RESUELTO LA SOPA DE LETRAS COMPLETA!");
     }
 
+}
+
+function actualizarPuntos(puntos) {
     fetch('/actualizarPuntos', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ "email": document.cookie, "puntos": puntos })
+        body: JSON.stringify({ "email": document.cookie.split("_")[0], "puntos": puntos })
     }).then(response => {
         if (response.status == 400) {
             alert("La suma de los puntos ha sido errónea.")
         }
     })
-
 }
 
 function cambiarEstado() {
@@ -373,7 +383,7 @@ function cambiarEstado() {
 
 async function usuarioAdmin() {
     await datos(document.cookie.split("_")[0]);
-    console.log(document.cookie);
+    console.log(document.cookie.split("_")[0]);
     var esAdmin = getEsAdmin();
     console.log(getEsAdmin());
 

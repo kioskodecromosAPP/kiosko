@@ -317,7 +317,7 @@ app.post('/registro', function(req, res) {
 
 app.post('/datos', function(req, res) {
     connection.query("SELECT * FROM USUARIOS WHERE EMAIL = ?", [req.body.email], function(err, result) {
-        let string = JSON.stringify(result[0]);
+        let string = JSON.stringify(result);
         let json = JSON.parse(string);
         res.json(json);
     })

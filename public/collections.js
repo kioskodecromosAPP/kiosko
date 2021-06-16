@@ -177,7 +177,7 @@ async function datos(email) {
         body: JSON.stringify({ "email": email })
     })
     const aux = await response.json();
-    console.log(aux);
+    console.log(aux+"PP")
     return aux.PUNTOS;
 }
 
@@ -221,7 +221,7 @@ async function editarHTML() {
         boton.innerHTML = "Comprar";
 
         boton.onclick = function() {
-            var email = document.cookie;
+            var email = document.cookie.split("_")[0];
             comprar(cartas[i], email);
         };
 

@@ -1,0 +1,5 @@
+El despliegue de la aplicacion se ha realizado en node, con la ayuda del framework backend Express.js.
+
+Para ejecutar la aplicación, instale node en su dispositivo, y a continuacion en el directorio raiz ejecutar la instruccion "node index.js" y en el navegador acceder a la dirección "localhost:3000".
+
+El proyecto está respaldado en el siguiente github: "https://github.com/kioskodecromosAPP/kiosko"

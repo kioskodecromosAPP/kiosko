@@ -80,32 +80,41 @@ CREATE TABLE CROMOSUSUARIO(
 
 INSERT INTO TIENDA(ID)
 VALUES('TIENDA');
+
 INSERT INTO USUARIOS(NOMBRE, APELLIDOS, EMAIL, ESADMIN, CONTRASENYA, PUNTOS, IDTIENDA)
 VALUES ('PEPE', 'PANTANOS', 'pepepantanos@gmail.com', '1', 'pepe123', '0', 'TIENDA');
+
+INSERT INTO USUARIOS(NOMBRE, APELLIDOS, EMAIL, ESADMIN, CONTRASENYA, PUNTOS, IDTIENDA)
+VALUES ('MARCOS', 'DIAZ', 'marcosdiaz2@gmail.com', '0', 'mesa3', '0', 'TIENDA');
+
+INSERT INTO USUARIOS(NOMBRE, APELLIDOS, EMAIL, ESADMIN, CONTRASENYA, PUNTOS, IDTIENDA)
+VALUES ('LUISA', 'GOMEZ', 'luisagomez24@gmail.com', '0', 'gomezluisa32', '0', 'TIENDA');
+
 INSERT INTO ALBUMES(ID, PRECIO, ESTADO, IDTIENDA)
 VALUES ('xy1', '12.27', '1', 'TIENDA');
 INSERT INTO ALBUMES(ID, PRECIO, ESTADO, IDTIENDA)
 VALUES ('sm1', '30.45', '1', 'TIENDA');
+
 INSERT INTO CROMOS(ID,PRECIO,IMAGEN,NUMCOPIAS,IDALBUM) VALUES ('sm1-167','12','https://images.pokemontcg.io/sm1/167.png','10','sm1');
-INSERT INTO CROMOS(ID,PRECIO,IMAGEN,NUMCOPIAS,IDALBUM) VALUES ('sm1-129','24','https://images.pokemontcg.io/sm1/129.png','10','sm1');
-INSERT INTO CROMOS(ID,PRECIO,IMAGEN,NUMCOPIAS,IDALBUM) VALUES ('sm1-95','21','https://images.pokemontcg.io/sm1/95.png','10','sm1');
-INSERT INTO CROMOS(ID,PRECIO,IMAGEN,NUMCOPIAS,IDALBUM) VALUES ('sm1-101','15','https://images.pokemontcg.io/sm1/101.png','10','sm1');
-INSERT INTO CROMOS(ID,PRECIO,IMAGEN,NUMCOPIAS,IDALBUM) VALUES ('sm1-106','27','https://images.pokemontcg.io/sm1/106.png','10','sm1');
-INSERT INTO CROMOS(ID,PRECIO,IMAGEN,NUMCOPIAS,IDALBUM) VALUES ('sm1-64','30','https://images.pokemontcg.io/sm1/64.png','10','sm1');
-INSERT INTO CROMOS(ID,PRECIO,IMAGEN,NUMCOPIAS,IDALBUM) VALUES ('sm1-14','19','https://images.pokemontcg.io/sm1/14.png','10','sm1');
-INSERT INTO CROMOS(ID,PRECIO,IMAGEN,NUMCOPIAS,IDALBUM) VALUES ('sm1-92','20','https://images.pokemontcg.io/sm1/92.png','10','sm1');
-INSERT INTO CROMOS(ID,PRECIO,IMAGEN,NUMCOPIAS,IDALBUM) VALUES ('sm1-21','34','https://images.pokemontcg.io/sm1/21.png','10','sm1');
-INSERT INTO CROMOS(ID,PRECIO,IMAGEN,NUMCOPIAS,IDALBUM) VALUES ('sm1-69','29','https://images.pokemontcg.io/sm1/69.png','10','sm1');
+INSERT INTO CROMOS(ID,PRECIO,IMAGEN,NUMCOPIAS,IDALBUM) VALUES ('sm1-129','24','https://images.pokemontcg.io/sm1/129.png','5','sm1');
+INSERT INTO CROMOS(ID,PRECIO,IMAGEN,NUMCOPIAS,IDALBUM) VALUES ('sm1-95','21','https://images.pokemontcg.io/sm1/95.png','19','sm1');
+INSERT INTO CROMOS(ID,PRECIO,IMAGEN,NUMCOPIAS,IDALBUM) VALUES ('sm1-101','15','https://images.pokemontcg.io/sm1/101.png','7','sm1');
+INSERT INTO CROMOS(ID,PRECIO,IMAGEN,NUMCOPIAS,IDALBUM) VALUES ('sm1-106','27','https://images.pokemontcg.io/sm1/106.png','9','sm1');
+INSERT INTO CROMOS(ID,PRECIO,IMAGEN,NUMCOPIAS,IDALBUM) VALUES ('sm1-64','30','https://images.pokemontcg.io/sm1/64.png','12','sm1');
+INSERT INTO CROMOS(ID,PRECIO,IMAGEN,NUMCOPIAS,IDALBUM) VALUES ('sm1-14','19','https://images.pokemontcg.io/sm1/14.png','8','sm1');
+INSERT INTO CROMOS(ID,PRECIO,IMAGEN,NUMCOPIAS,IDALBUM) VALUES ('sm1-92','20','https://images.pokemontcg.io/sm1/92.png','9','sm1');
+INSERT INTO CROMOS(ID,PRECIO,IMAGEN,NUMCOPIAS,IDALBUM) VALUES ('sm1-21','34','https://images.pokemontcg.io/sm1/21.png','6','sm1');
+INSERT INTO CROMOS(ID,PRECIO,IMAGEN,NUMCOPIAS,IDALBUM) VALUES ('sm1-69','29','https://images.pokemontcg.io/sm1/69.png','11','sm1');
 INSERT INTO CROMOS(ID,PRECIO,IMAGEN,NUMCOPIAS,IDALBUM) VALUES ('xy1-125','12','https://images.pokemontcg.io/xy1/125.png','10','xy1');
-INSERT INTO CROMOS(ID,PRECIO,IMAGEN,NUMCOPIAS,IDALBUM) VALUES ('xy1-80','36','https://images.pokemontcg.io/xy1/80.png','10','xy1');
-INSERT INTO CROMOS(ID,PRECIO,IMAGEN,NUMCOPIAS,IDALBUM) VALUES ('xy1-35','21','https://images.pokemontcg.io/xy1/35.png','10','xy1');
-INSERT INTO CROMOS(ID,PRECIO,IMAGEN,NUMCOPIAS,IDALBUM) VALUES ('xy1-87','15','https://images.pokemontcg.io/xy1/87.png','10','xy1');
+INSERT INTO CROMOS(ID,PRECIO,IMAGEN,NUMCOPIAS,IDALBUM) VALUES ('xy1-80','36','https://images.pokemontcg.io/xy1/80.png','8','xy1');
+INSERT INTO CROMOS(ID,PRECIO,IMAGEN,NUMCOPIAS,IDALBUM) VALUES ('xy1-35','21','https://images.pokemontcg.io/xy1/35.png','6','xy1');
+INSERT INTO CROMOS(ID,PRECIO,IMAGEN,NUMCOPIAS,IDALBUM) VALUES ('xy1-87','15','https://images.pokemontcg.io/xy1/87.png','5','xy1');
 INSERT INTO CROMOS(ID,PRECIO,IMAGEN,NUMCOPIAS,IDALBUM) VALUES ('xy1-126','23','https://images.pokemontcg.io/xy1/126.png','10','xy1');
-INSERT INTO CROMOS(ID,PRECIO,IMAGEN,NUMCOPIAS,IDALBUM) VALUES ('xy1-18','33','https://images.pokemontcg.io/xy1/18.png','10','xy1');
-INSERT INTO CROMOS(ID,PRECIO,IMAGEN,NUMCOPIAS,IDALBUM) VALUES ('xy1-55','19','https://images.pokemontcg.io/xy1/55.png','10','xy1');
-INSERT INTO CROMOS(ID,PRECIO,IMAGEN,NUMCOPIAS,IDALBUM) VALUES ('xy1-103','17','https://images.pokemontcg.io/xy1/103.png','10','xy1');
+INSERT INTO CROMOS(ID,PRECIO,IMAGEN,NUMCOPIAS,IDALBUM) VALUES ('xy1-18','33','https://images.pokemontcg.io/xy1/18.png','12','xy1');
+INSERT INTO CROMOS(ID,PRECIO,IMAGEN,NUMCOPIAS,IDALBUM) VALUES ('xy1-55','19','https://images.pokemontcg.io/xy1/55.png','7','xy1');
+INSERT INTO CROMOS(ID,PRECIO,IMAGEN,NUMCOPIAS,IDALBUM) VALUES ('xy1-103','17','https://images.pokemontcg.io/xy1/103.png','6','xy1');
 INSERT INTO CROMOS(ID,PRECIO,IMAGEN,NUMCOPIAS,IDALBUM) VALUES ('xy1-124','14','https://images.pokemontcg.io/xy1/124.png','10','xy1');
-INSERT INTO CROMOS(ID,PRECIO,IMAGEN,NUMCOPIAS,IDALBUM) VALUES ('xy1-69','19','https://images.pokemontcg.io/xy1/69.png','10','xy1');
+INSERT INTO CROMOS(ID,PRECIO,IMAGEN,NUMCOPIAS,IDALBUM) VALUES ('xy1-69','19','https://images.pokemontcg.io/xy1/69.png','18','xy1');
 
 
 

@@ -32,6 +32,7 @@ try {
 
 app.post('/getCarta', async function(req, res) {
     let card = await pokemon.card.find(req.body.id);
+    
     res.status(200).json(card);
 })
 

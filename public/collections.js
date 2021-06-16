@@ -241,7 +241,6 @@ async function editarHTML() {
 
         let htmlElement4 = document.createElement('div');
         htmlElement4.id = 'descrip' + i;
-        //document.getElementById("principal").appendChild(htmlElement4);
 
         htmlElement4.textContent = "Albúm: " + cartas[i].IDALBUM;
 

@@ -363,7 +363,7 @@ app.post('/getCartasUsuario', function(req, res) {
 app.post('/actividadesAdmin', function(req, res) {
     console.log(req.body);
 
-    let aux = comprobarExisteColeccion(req.body.nombreCol);
+    let aux = comprobarIdUnico(req.body.nombreCol);
     if (aux == false) {
         res.status(300).send();
     } else {

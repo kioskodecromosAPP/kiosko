@@ -382,8 +382,8 @@ function cambiarEstado() {
 }
 
 async function usuarioAdmin() {
-    await datos(document.cookie.split("_")[0]);
-    console.log(document.cookie.split("_")[0]);
+    await datos(document.cookie.split("_"));
+    console.log(document.cookie);
     var esAdmin = getEsAdmin();
     console.log(getEsAdmin());
 

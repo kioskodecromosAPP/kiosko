@@ -46,6 +46,35 @@ async function getAlbumes(id) {
     return aux;
 }
 
+async function pepe() {
+    var id = document.cookie.split("_");
+    const response = await fetch('/getCartasUsuario', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ "id": id[1] })
+    });
+
+    const cartas = await response.json();
+
+    for (let i = 0; i < cartas.length; i++) {
+        let htmlElement = document.createElement('div');
+        htmlElement.id = 'cromo' + i;
+        htmlElement.className = 'cromo';
+        document.getElementById("principal").appendChild(htmlElement);
+
+        htmlElement = document.createElement('img');
+        htmlElement.src = cartas[i].IMAGEN;
+        htmlElement.className = 'image';
+
+
+        document.getElementById("cromo" + i).appendChild(htmlElement);
+
+    }
+
+}
+
 //FUNCIÓN PARA COMPRAR UN CROMO
 async function comprar(carta, email) {
     //COMPROBAMOS SI EL USUARIO TIENE ALGUNA COLECCIÓN PARA GUARDAR EL CROMO A COMPRARi
